@@ -1,11 +1,17 @@
 import React from 'react';
 
-const Layout = ({content = () => null }) => (
-  <div>
-    <div>
-      {content()}
-    </div>
-  </div>
-);
+class MainLayout extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-export default Layout;
+  render() {
+    return (
+      <div>
+        MainLayout
+      </div>
+    );
+  }
+}
+
+export default MainLayout;
