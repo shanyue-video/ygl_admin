@@ -1,11 +1,11 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import { setComposerStub } from 'react-komposer';
-import Home from '../home.jsx';
+import UserAvatar from '../user_avatar.jsx';
 
-storiesOf('core.Home', module)
+storiesOf('core.UserAvatar', module)
   .add('default view', () => {
     return (
-      <Home />
+      <UserAvatar />
     );
   })
