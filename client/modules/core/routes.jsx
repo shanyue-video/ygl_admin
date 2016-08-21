@@ -23,7 +23,6 @@ export default function (injectDeps, {FlowRouter}) {
         action() {
             mount(MainLayoutCtx, {
                 navigations: () => (<Navigations />),
-                //content: () => (<Content name='pointApplay' />)
                 content: () => (<Content />)
             });
         }
