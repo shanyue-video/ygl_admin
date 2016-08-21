@@ -6,9 +6,16 @@ class Navigations extends React.Component {
         super(props);
     }
 
+    onClick(args) {
+        const {item, key, keyPath} = args;
+        console.log(item);
+        console.log(key);
+        console.log(keyPath);
+    }
+
     render() {
         return (
-            <Menu>
+            <Menu theme='dark' onClick={this.onClick}>
                 <Menu.Item key="pointApplay">{<span><Icon type="mail" /><span>提现申请</span></span>}</Menu.Item>
                 <Menu.Item key="badge">{<span><Icon type="mail" /><span>成就管理</span></span>}</Menu.Item>
                 <Menu.Item key="banners">{<span><Icon type="mail" /><span>轮播广告</span></span>}</Menu.Item>

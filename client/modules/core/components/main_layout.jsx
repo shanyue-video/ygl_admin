@@ -6,6 +6,7 @@ import Navigations from './navigations'
 class MainLayout extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
     }
 
     render() {
@@ -18,6 +19,9 @@ class MainLayout extends React.Component {
                     <div>
                         <Navigations />
                     </div>
+                </div>
+                <div className="layout-main">
+                    {this.props.content()}
                 </div>
             </div>
         );
