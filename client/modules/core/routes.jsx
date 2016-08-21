@@ -16,7 +16,6 @@ export default function (injectDeps, {FlowRouter}) {
         }
     });
 
-
     FlowRouter.route('/pointApplay', {
         name: 'pointApplay',
         action() {

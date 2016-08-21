@@ -1,9 +1,11 @@
 import React from 'react';
 import { Menu, Icon } from 'antd';
+import {FlowRouter} from '../../../configs/context.js';
 
 class Navigations extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
     }
 
     onClick(args) {
@@ -11,6 +13,7 @@ class Navigations extends React.Component {
         console.log(item);
         console.log(key);
         console.log(keyPath);
+        this.props.urlGo(key);
     }
 
     render() {

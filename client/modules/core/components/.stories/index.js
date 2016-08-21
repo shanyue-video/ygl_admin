@@ -4,3 +4,4 @@ import UserAvatar from './user_avatar';
 import Navigations from './navigations';
 import Content from './content';
 import Content from './content';
+import Navigations from './navigations';
