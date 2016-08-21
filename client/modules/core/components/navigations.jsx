@@ -6,13 +6,11 @@ class Navigations extends React.Component {
     constructor(props) {
         super(props);
         console.log(props);
+        this.onClick = this.onClick.bind(this);
     }
 
     onClick(args) {
-        const {item, key, keyPath} = args;
-        console.log(item);
-        console.log(key);
-        console.log(keyPath);
+        const {key} = args;
         this.props.urlGo(key);
     }
 

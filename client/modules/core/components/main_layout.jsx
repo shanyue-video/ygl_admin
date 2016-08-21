@@ -1,7 +1,6 @@
 import React from 'react';
 
 import UserAvatar from './user_avatar'
-import Navigations from './navigations'
 
 class MainLayout extends React.Component {
     constructor(props) {
@@ -17,7 +16,7 @@ class MainLayout extends React.Component {
                         <UserAvatar bg='http://m.yigonglue.com:3000/avatar.png' />
                     </a>
                     <div>
-                        <Navigations />
+                        {this.props.navigations()}
                     </div>
                 </div>
                 <div className="layout-main">
