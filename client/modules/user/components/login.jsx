@@ -8,10 +8,12 @@ let LoginForm = React.createClass({
 
     handleSubmit(e) {
         e.preventDefault();
+        console.log(this.props);
         console.log('收到表单值：', this.props.form.getFieldsValue());
         const {userName, password} = this.props.form.getFieldsValue();
         console.log(userName);
         console.log(password);
+        this.props.login(userName, password);
     },
 
     render() {
@@ -61,7 +63,7 @@ class Login extends React.Component {
                     账户登录
                 </div>
                 <div className="page-login-body">
-                    <LoginForm />
+                    <LoginForm login={this.props.login} />
                 </div>
             </div>
         );
