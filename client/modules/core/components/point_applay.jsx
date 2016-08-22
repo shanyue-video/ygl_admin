@@ -3,10 +3,9 @@ import React from 'react';
 import { Table } from 'antd';
 import { Modal, Button } from 'antd';
 
-
 let AgreeButton = React.createClass({
     getInitialState() {
-        console.log(this.props.opId);
+        console.log(this.props);
         return { visible: false };
     },
     showModal() {
@@ -15,12 +14,12 @@ let AgreeButton = React.createClass({
         });
     },
     handleOk() {
+        //this.props.confirm(this.props.opId._id);
         this.setState({
             visible: false,
         });
     },
     handleCancel(e) {
-        console.log(e);
         this.setState({
             visible: false,
         });
@@ -40,6 +39,7 @@ let AgreeButton = React.createClass({
 
 
 class PointApplay extends React.Component {
+
     constructor(props) {
         super(props);
     }

@@ -14,6 +14,7 @@ export const composer = ({context}, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
+    confirm: actions.PointApplay.confirm,
     context: () => context
 });
 
