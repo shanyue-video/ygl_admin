@@ -6,7 +6,14 @@ class Navigations extends React.Component {
     constructor(props) {
         super(props);
         console.log(props);
+        this.componentDidMount = this.componentDidMount.bind(this);
         this.onClick = this.onClick.bind(this);
+    }
+
+    componentDidMount() {
+        if(!this.props.user) {
+            this.props.urlGo('login');
+        }
     }
 
     onClick(args) {
