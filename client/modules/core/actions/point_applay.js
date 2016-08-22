@@ -1,7 +1,9 @@
+import {Meteor} from 'meteor/meteor';
+
 export default {
 
-    confirm({Meteor}, aid) {
-        Meteor.call("agree_point_apply", { _id: aid }, function() {
+    confirm(aid) {
+        Meteor.call("agree_point_apply.sample", { _id: aid }, function() {
 
         })
     }

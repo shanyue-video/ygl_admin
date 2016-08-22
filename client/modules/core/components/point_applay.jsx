@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Table } from 'antd';
 import { Modal, Button } from 'antd';
+import Action from '../actions/index.js'
 
 let AgreeButton = React.createClass({
     getInitialState() {
@@ -15,6 +16,8 @@ let AgreeButton = React.createClass({
     },
     handleOk() {
         //this.props.confirm(this.props.opId._id);
+        console.log(Action);
+        Action.PointApplay.confirm(this.props.opId._id);
         this.setState({
             visible: false,
         });
