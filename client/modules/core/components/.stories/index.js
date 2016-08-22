@@ -5,3 +5,4 @@ import Navigations from './navigations';
 import Content from './content';
 import Content from './content';
 import Navigations from './navigations';
+import PointApplay from './point_applay';

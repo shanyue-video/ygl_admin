@@ -5,7 +5,12 @@ import Navigations from '../components/navigations.jsx';
 export const composer = ({context}, onData) => {
     const {Meteor, Collections} = context();
 
-    onData(null, {});
+    let user = Meteor.user();
+    console.log(user);
+    //user = 'dj';
+    //if()
+
+    onData(null, {user});
 };
 
 export const depsMapper = (context, actions) => ({
