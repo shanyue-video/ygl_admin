@@ -5,7 +5,6 @@ import UserAvatar from './user_avatar'
 class MainLayout extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
     }
 
     render() {
