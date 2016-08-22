@@ -9,16 +9,6 @@ import PointApplay from './containers/point_applay';
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(MainLayout);
 
-    /*
-    FlowRouter.notFound = {
-    //     Subscriptions registered here don't have Fast Render support.
-        name: 'notFound',
-        action() {
-
-        }
-    };
-    */
-
     FlowRouter.route('/', {
         name: 'home',
         action() {
