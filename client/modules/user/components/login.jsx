@@ -5,6 +5,15 @@ import { Form, Input, Button , Row, Col} from 'antd';
 const FormItem = Form.Item;
 
 let LoginForm = React.createClass({
+
+    handleSubmit(e) {
+        e.preventDefault();
+        console.log('收到表单值：', this.props.form.getFieldsValue());
+        const {userName, password} = this.props.form.getFieldsValue();
+        console.log(userName);
+        console.log(password);
+    },
+
     render() {
         const { getFieldProps } = this.props.form;
         //const style = {textAlign: 'center'};
@@ -13,7 +22,7 @@ let LoginForm = React.createClass({
             wrapperCol: { span: 18 },
         };
         return (
-            <Form horizontal>
+            <Form horizontal onSubmit={this.handleSubmit}>
                 <FormItem {...formItemLayout}
                     label="账户"
                     >
