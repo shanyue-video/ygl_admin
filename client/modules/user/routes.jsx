@@ -2,6 +2,7 @@ import React from 'react';
 import {mount} from 'react-mounter';
 
 import LoginLayout from '/client/modules/user/components/login_layout.jsx';
+import Login from './containers/login.js'
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayout = injectDeps(LoginLayout);
@@ -20,7 +21,7 @@ export default function (injectDeps, {FlowRouter}) {
         name: 'notFound',
         action() {
             mount(MainLayout, {
-                //content: () => (< />)
+                content: () => (<Login />)
             });
         }
     };

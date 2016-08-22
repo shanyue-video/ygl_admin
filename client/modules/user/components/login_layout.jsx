@@ -8,7 +8,7 @@ class LoginLayout extends React.Component {
   render() {
     return (
       <div>
-        LoginLayout
+          {this.props.content()}
       </div>
     );
   }
