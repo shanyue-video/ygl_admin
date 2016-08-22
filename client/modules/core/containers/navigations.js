@@ -6,8 +6,9 @@ export const composer = ({context}, onData) => {
     const {Meteor, Collections} = context();
 
     let user = Meteor.user();
+    console.log('----->user');
     console.log(user);
-    user = 'dj';
+    //user = 'dj';
     //if()
 
     onData(null, {user});

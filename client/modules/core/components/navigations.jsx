@@ -5,7 +5,6 @@ import {FlowRouter} from '../../../configs/context.js';
 class Navigations extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.onClick = this.onClick.bind(this);
     }
