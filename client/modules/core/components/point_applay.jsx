@@ -6,7 +6,6 @@ import Action from '../actions/index.js'
 
 let AgreeButton = React.createClass({
     getInitialState() {
-        console.log(this.props);
         return { visible: false };
     },
     showModal() {
@@ -15,8 +14,6 @@ let AgreeButton = React.createClass({
         });
     },
     handleOk() {
-        //this.props.confirm(this.props.opId._id);
-        console.log(Action);
         Action.PointApplay.confirm(this.props.opId._id);
         this.setState({
             visible: false,

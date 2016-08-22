@@ -8,7 +8,6 @@ export default function () {
             var obj = Applys.findOne({
                 _id: args._id
             });
-            /*
             if (!obj.checked) {
                 Applys.update({ _id: args._id }, { $set: { check: 1 } });
                 Meteor.users.update({
@@ -30,8 +29,7 @@ export default function () {
 
                 });
             }
-            */
-            console.log(obj);
+            //console.log(obj);
         }
     });
 }
