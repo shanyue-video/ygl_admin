@@ -17,28 +17,6 @@ let AddButton = React.createClass({
         return { visible: false };
     },
     showModal(e) {
-        //const i = $('#picture');
-        //console.log($(e.currentTarget));
-        /*
-        let thumb;
-        try {
-            thumb = this.props.opId.thumb;
-        } catch (e) {
-            thumb = null;
-        }
-        if(thumb) {
-            //const t = '#'+this.props.opId._id+' #picture';
-            //console.log(t);
-            //console.log(e.$('#'+this.props.opId._id));
-            console.log(this.refs['inputRef']);
-            console.log(this.refs);
-            const input = this.refs['inputRef'];
-            input.parent().css({
-                "background-image": "url(" + thumb.base64 + ")"
-            });
-            input.attr("data-file", thumb.base64);
-        }
-        */
         this.setState({
             visible: true,
         });
@@ -55,8 +33,6 @@ let AddButton = React.createClass({
         });
     },
     handleSubmit() {
-        //console.log('收到：', $('#picture').attr("data-file"));
-        //console.log('收到表单值：', this.props.form.getFieldsValue());
         const { desc, orderBy, detail, group, status } = this.props.form.getFieldsValue();
         const thumb = $('#picture').attr("data-file");
         const createAt = new Date();
@@ -83,19 +59,10 @@ let AddButton = React.createClass({
         });
     },
     inputRef(c) {
-        console.log(c);
-        //console.log(c.style);
-        //console.log(type(c));
-        console.log(this.props);
         if (this.props.opId){
             const thumb = this.props.opId.thumb;
             c.style.backgroundImage = "url(" + thumb + ")";
             console.log(c);
-            //$(c).parent().css({
-            //    "background-image": "url(" + thumb.base64 + ")"
-            //});
-            //$(c).attr("data-file", thumb.base64);
-            //c.
         }
     },
 
