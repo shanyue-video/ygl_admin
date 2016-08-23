@@ -13,46 +13,10 @@ import lrz from 'lrz/dist/lrz.bundle.js';
 
 let AddButton = React.createClass({
     getInitialState() {
-
         this.getFieldProps = this.props.form;
-        //this.fieldProps =
-        //    ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
-                console.log('--->filedddd');
-        //        console.log(this.props.opId);
-                //return getFieldProps(s, {});
-            //});
-
-
         return { visible: false };
     },
     showModal() {
-        /*
-        if (this.props.opId != undefined) {
-            const [descFiled, orderByFiled, detailFiled, groupFiled, statusFiled] = this.fieldProps;
-            [descFiled, orderByFiled, detailFiled, groupFiled, statusFiled].map((o) => {
-                console.log('---dd>', this.props.opId);
-                o.initialValue = this.props.opId[o.id];
-            });
-            console.log('a--->');
-            console.log(detailFiled);
-        }*/
-
-        /*
-        if (this.props.opId != undefined) {
-            const { getFieldProps } = this.props.form;
-            this.fieldProps =
-                ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
-                    //console.log('--->filed');
-                    //console.log(getFieldProps(s, {}));
-                    console.log('--->filedsss');
-                    console.log(this.props.opId);
-                    return getFieldProps(s, {'initialValue': this.props.opId[s]});
-                });
-            console.log('--->filed');
-            console.log(this.fieldProps);
-        }
-        */
-
         this.setState({
             visible: true,
         });
@@ -68,17 +32,19 @@ let AddButton = React.createClass({
             visible: false,
         });
     },
-
-    handleSubmit(e) {
-        e.preventDefault();
-        //console.log(e);
-        console.log('收到：', $('#picture').attr("data-file"));
-        console.log('收到表单值：', this.props.form.getFieldsValue());
-        const { desc, orderBy, detail, group, username } = this.props.form.getFieldsValue();
+    handleSubmit() {
+        //console.log('收到：', $('#picture').attr("data-file"));
+        //console.log('收到表单值：', this.props.form.getFieldsValue());
+        const { desc, orderBy, detail, group, status } = this.props.form.getFieldsValue();
         const thumb = $('#picture').attr("data-file");
         const createAt = new Date();
-        const obj = {desc, orderBy, detail, group, username, thumb, createAt};
-        Action.Banners.insert(obj);
+        const obj = {desc, orderBy, detail, group, status: parseInt(status), thumb, createAt};
+        if (this.props.opId == undefined) {
+            Action.Banners.insert(obj);
+        } else {
+            //console.log(this.props.opId);
+            Action.Banners.update(obj, this.props.opId._id);
+        }
         this.setState({
             visible: false,
         });
@@ -96,37 +62,18 @@ let AddButton = React.createClass({
     },
 
     render() {
-        /*
-        const [descFiled, orderByFiled, detailFiled, groupFiled, statusFiled] = this.fieldProps;
-        console.log('<---filed');
-        console.log(descFiled);
-        console.log(descFiled);
-        console.log('filed--->');
-        const { getFieldProps } = this.props.form;
-        */
-
-        //const { getFieldProps } = this.props.form;
         const { getFieldProps } = this.getFieldProps;
-        let fieldProps =
-                        ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
-                            //console.log('--->filed');
-                            //console.log(this.props.opId);
-                            return getFieldProps(s, {});
-                        });
+        let fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+            return getFieldProps(s, {});
+        });
         if (this.props.opId != undefined) {
-            //const { getFieldProps } = this.props.form;
-            fieldProps =
-                ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
-                    //console.log('--->filed');
-                    //console.log(getFieldProps(s, {}));
-                    console.log('--->filedsss');
-                    console.log(this.props.opId);
+            fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+                if(s == 'status')
+                    return getFieldProps(s, {'initialValue': this.props.opId[s]+''});
+                else
                     return getFieldProps(s, {'initialValue': this.props.opId[s]});
-                });
-            console.log('--->filed');
-            console.log(this.fieldProps);
+            });
         }
-
         const editorForm = (
             <Form>
                 <div className="ff-file">
@@ -150,7 +97,7 @@ let AddButton = React.createClass({
                             wrapperCol={{ span: 14 }}
                             >
                             <Input placeholder="排序" size="default" autoComplete="off"
-                                {...getFieldProps('orderBy', {})} />
+                                {...fieldProps[1]} />
                         </FormItem>
                         <FormItem
                             label="内容"
@@ -158,7 +105,7 @@ let AddButton = React.createClass({
                             wrapperCol={{ span: 14 }}
                             >
                             <Input type="textarea" placeholder="内容" autosize autoComplete="off"
-                                {...getFieldProps('detail', {})} />
+                                {...fieldProps[2]} />
 
                         </FormItem>
                     </Col>
@@ -169,7 +116,7 @@ let AddButton = React.createClass({
                             wrapperCol={{ span: 14 }}
                             >
                             <Input placeholder="组" size="default"
-                                {...getFieldProps('group', {})} />
+                                {...fieldProps[3]} />
                         </FormItem>
                         <FormItem
                             label="状态"
@@ -177,7 +124,7 @@ let AddButton = React.createClass({
                             wrapperCol={{ span: 14 }}
                             >
                             <Select style={{ width: 113 }} placeholder="请选择状态"
-                                {...getFieldProps('status', {})}>
+                                {...fieldProps[4]}>
                                 <Option value="1">已上线</Option>
                                 <Option value="0">未上线</Option>
                             </Select>
@@ -231,7 +178,7 @@ class Banners extends React.Component {
         }, {
             title: '状态',
             render: function(obj) {
-                return obj.status = 1 ? "上线" : "未上线";
+                return obj.status == 1 ? "上线" : "未上线";
             }
         }, {
             title: '创建时间',

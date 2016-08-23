@@ -38,6 +38,33 @@ export default function () {
                     throw e;
                 });
             });
+        },
+        'banner_update'(args) {
+            Banners.update({
+                _id: args.__id
+            }, {
+                $set: args.obj
+            });
+            //console.log('---');
+            //console.log(__id);
+            //console.log(x);
+            //var obj = Banners.findOne({
+            //    _id: __id
+            //});
+            const obj = args.obj;
+            if(obj.thumb && obj.thumb.indexOf("base64") > -1) {
+                upload(obj.thumb, function(data) {
+                    Banners.update({
+                        _id: args._id
+                    }, {
+                        $set: {
+                            "thumb": data
+                        }
+                    });
+                }, function(e) {
+                    throw e;
+                });
+            }
         }
     });
 }
