@@ -8,86 +8,23 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 
 import Action from '../actions/index.js'
-
-//var lrz = require('lrz/dist/lrz.bundle.js');
 import lrz from 'lrz/dist/lrz.bundle.js';
 
-/*
- let AgreeButton = React.createClass({
- getInitialState() {
- return { visible: false };
- },
- showModal() {
- this.setState({
- visible: true,
- });
- },
- handleOk() {
- Action.Banners.confirm(this.props.opId._id);
- this.setState({
- visible: false,
- });
- },
- handleCancel(e) {
- this.setState({
- visible: false,
- });
- },
- render() {
- return (
- <div>
- <Button type="primary" onClick={this.showModal}>{this.props.text}</Button>
- <Modal title="提交" visible={this.state.visible}
- onOk={this.handleOk} onCancel={this.handleCancel}>
- <p>确定同意{this.props.opId.name}的请求?</p>
- </Modal>
- </div>
- );
- },
- });
- AgreeButton = Form.create()(AgreeButton);*/
 
 let AddButton = React.createClass({
     getInitialState() {
-        //if (this.props.opId == undefined) {
-        //    this.getFieldProps = this.props.form;
-        //} else {
-        //    this.getFieldProps = this.props.form;
-        //}
-        //this.statusFiled = this.props.form;
-
-        //this.fieldProps
 
         const { getFieldProps } = this.props.form;
-        //const {descFiled, orderByFiled, detailFiled, groupFiled, statusFiled} = {{'': ''}, {}, {}, {}};
-        //const [descFiled, orderByFiled, detailFiled, groupFiled, statusFiled] =
-        ///*
         this.fieldProps =
             ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
-                //console.log('--->filed');
-                //console.log(getFieldProps(s, {}));
                 console.log('--->filed');
                 console.log(this.props.opId);
                 return getFieldProps(s, {});
             });
-        //*/
-        //console.log(a);
-        //console.log('--->');
-        //console.log(descFiled);
-
 
         return { visible: false };
     },
     showModal() {
-        //const { getFieldProps } = this.props.form;
-        //console.log(getFieldProps('desc', {}));
-        //console.log('start init-->');
-        //console.log(this.props.opId);
-        //if (this.props.opId != undefined) {
-        //const {getFieldProps} = this.props.form;
-        //this.getFieldProps = {getFieldProps};
-        //this.getFieldProps = this.props.form;
-        //}
         /*
         if (this.props.opId != undefined) {
             const [descFiled, orderByFiled, detailFiled, groupFiled, statusFiled] = this.fieldProps;
@@ -120,8 +57,6 @@ let AddButton = React.createClass({
         });
     },
     handleOk() {
-        //Action.Banners.confirm(this.props.opId._id);
-        //console.log(this.props.children);
         this.setState({
             visible: false,
         });
@@ -160,13 +95,7 @@ let AddButton = React.createClass({
 
     render() {
 
-        console.log('------->');
-        console.log(this.fieldProps[0]);
-
-
         const [descFiled, orderByFiled, detailFiled, groupFiled, statusFiled] = this.fieldProps;
-        //const {getFieldProps} = this.props.form;
-        //console.log(getFieldProps('desc', {}));
 
         const editorForm = (
             <Form onSubmit={this.handleSubmit}>
