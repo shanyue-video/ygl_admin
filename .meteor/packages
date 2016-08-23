@@ -23,3 +23,4 @@ shell-server@0.2.1            # Server-side component of the `meteor shell` comm
 kadira:flow-router
 accounts-base
 jparker:crypto-md5
+http

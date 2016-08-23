@@ -12,44 +12,109 @@ import Action from '../actions/index.js'
 //var lrz = require('lrz/dist/lrz.bundle.js');
 import lrz from 'lrz/dist/lrz.bundle.js';
 
-let AgreeButton = React.createClass({
-    getInitialState() {
-        return { visible: false };
-    },
-    showModal() {
-        this.setState({
-            visible: true,
-        });
-    },
-    handleOk() {
-        Action.Banners.confirm(this.props.opId._id);
-        this.setState({
-            visible: false,
-        });
-    },
-    handleCancel(e) {
-        this.setState({
-            visible: false,
-        });
-    },
-    render() {
-        return (
-            <div>
-                <Button type="primary" onClick={this.showModal}>{this.props.text}</Button>
-                <Modal title="提交" visible={this.state.visible}
-                       onOk={this.handleOk} onCancel={this.handleCancel}>
-                    <p>确定同意{this.props.opId.name}的请求?</p>
-                </Modal>
-            </div>
-        );
-    },
-});
+/*
+ let AgreeButton = React.createClass({
+ getInitialState() {
+ return { visible: false };
+ },
+ showModal() {
+ this.setState({
+ visible: true,
+ });
+ },
+ handleOk() {
+ Action.Banners.confirm(this.props.opId._id);
+ this.setState({
+ visible: false,
+ });
+ },
+ handleCancel(e) {
+ this.setState({
+ visible: false,
+ });
+ },
+ render() {
+ return (
+ <div>
+ <Button type="primary" onClick={this.showModal}>{this.props.text}</Button>
+ <Modal title="提交" visible={this.state.visible}
+ onOk={this.handleOk} onCancel={this.handleCancel}>
+ <p>确定同意{this.props.opId.name}的请求?</p>
+ </Modal>
+ </div>
+ );
+ },
+ });
+ AgreeButton = Form.create()(AgreeButton);*/
 
 let AddButton = React.createClass({
     getInitialState() {
+        //if (this.props.opId == undefined) {
+        //    this.getFieldProps = this.props.form;
+        //} else {
+        //    this.getFieldProps = this.props.form;
+        //}
+        //this.statusFiled = this.props.form;
+
+        //this.fieldProps
+
+        const { getFieldProps } = this.props.form;
+        //const {descFiled, orderByFiled, detailFiled, groupFiled, statusFiled} = {{'': ''}, {}, {}, {}};
+        //const [descFiled, orderByFiled, detailFiled, groupFiled, statusFiled] =
+        ///*
+        this.fieldProps =
+            ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+                //console.log('--->filed');
+                //console.log(getFieldProps(s, {}));
+                console.log('--->filed');
+                console.log(this.props.opId);
+                return getFieldProps(s, {});
+            });
+        //*/
+        //console.log(a);
+        //console.log('--->');
+        //console.log(descFiled);
+
+
         return { visible: false };
     },
     showModal() {
+        //const { getFieldProps } = this.props.form;
+        //console.log(getFieldProps('desc', {}));
+        //console.log('start init-->');
+        //console.log(this.props.opId);
+        //if (this.props.opId != undefined) {
+        //const {getFieldProps} = this.props.form;
+        //this.getFieldProps = {getFieldProps};
+        //this.getFieldProps = this.props.form;
+        //}
+        /*
+        if (this.props.opId != undefined) {
+            const [descFiled, orderByFiled, detailFiled, groupFiled, statusFiled] = this.fieldProps;
+            [descFiled, orderByFiled, detailFiled, groupFiled, statusFiled].map((o) => {
+                console.log('---dd>', this.props.opId);
+                o.initialValue = this.props.opId[o.id];
+            });
+            console.log('a--->');
+            console.log(detailFiled);
+        }*/
+
+        /*
+        if (this.props.opId != undefined) {
+            const { getFieldProps } = this.props.form;
+            this.fieldProps =
+                ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+                    //console.log('--->filed');
+                    //console.log(getFieldProps(s, {}));
+                    console.log('--->filedsss');
+                    console.log(this.props.opId);
+                    return getFieldProps(s, {'initialValue': this.props.opId[s]});
+                });
+            console.log('--->filed');
+            console.log(this.fieldProps);
+        }
+        */
+
         this.setState({
             visible: true,
         });
@@ -95,13 +160,19 @@ let AddButton = React.createClass({
 
     render() {
 
-        const { getFieldProps } = this.props.form;
+        console.log('------->');
+        console.log(this.fieldProps[0]);
+
+
+        const [descFiled, orderByFiled, detailFiled, groupFiled, statusFiled] = this.fieldProps;
+        //const {getFieldProps} = this.props.form;
+        //console.log(getFieldProps('desc', {}));
 
         const editorForm = (
             <Form onSubmit={this.handleSubmit}>
                 <div className="ff-file">
                     <input onChange={this.onChange} type="file" id="picture" name="picture"
-                         />
+                        />
                 </div>
                 <br />
                 <Row align='middle' gutter={16}>
@@ -111,8 +182,8 @@ let AddButton = React.createClass({
                             labelCol={{ span: 10 }}
                             wrapperCol={{ span: 14 }}
                             >
-                            <Input placeholder="文字描述" size="default"
-                                {...getFieldProps('desc', {})} />
+                            <Input placeholder="文字描述" size="default" type="text"
+                                {...descFiled} />
                         </FormItem>
                         <FormItem
                             label="排序"
@@ -120,7 +191,7 @@ let AddButton = React.createClass({
                             wrapperCol={{ span: 14 }}
                             >
                             <Input placeholder="排序" size="default"
-                                {...getFieldProps('orderBy', {})} />
+                                {...orderByFiled} />
                         </FormItem>
                         <FormItem
                             label="内容"
@@ -128,7 +199,7 @@ let AddButton = React.createClass({
                             wrapperCol={{ span: 14 }}
                             >
                             <Input type="textarea" placeholder="内容" autosize
-                                {...getFieldProps('detail', {})} />
+                                {...detailFiled} />
 
                         </FormItem>
                     </Col>
@@ -139,7 +210,7 @@ let AddButton = React.createClass({
                             wrapperCol={{ span: 14 }}
                             >
                             <Input placeholder="组" size="default"
-                                {...getFieldProps('group', {})} />
+                                {...groupFiled} />
                         </FormItem>
                         <FormItem
                             label="状态"
@@ -147,7 +218,7 @@ let AddButton = React.createClass({
                             wrapperCol={{ span: 14 }}
                             >
                             <Select style={{ width: 113 }} placeholder="请选择状态"
-                                {...getFieldProps('status', {})}>
+                                {...statusFiled}>
                                 <Option value="1">已上线</Option>
                                 <Option value="0">未上线</Option>
                             </Select>
@@ -167,7 +238,7 @@ let AddButton = React.createClass({
         return (
             <div>
                 <Button type="primary" onClick={this.showModal}>{this.props.text}</Button>
-                <Modal footer={<div/>} style={{ top: 40 }} title="提交" visible={this.state.visible}
+                <Modal footer={<div/>} style={{ top: 40 }} title={this.props.text} visible={this.state.visible}
                        onCancel={this.handleCancel}>
                     {editorForm}
                 </Modal>
@@ -212,7 +283,7 @@ class Banners extends React.Component {
         }, {
             title: '详细',
             render: function(obj) {
-                return (<AgreeButton text='详情' opId={obj} />);
+                return (<AddButton text='详情' opId={obj} />);
             }
         }];
 
