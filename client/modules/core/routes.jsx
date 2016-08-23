@@ -2,9 +2,11 @@ import React from 'react';
 import {mount} from 'react-mounter';
 
 import MainLayout from './components/main_layout';
-import Content from './containers/content';
 import Navigations from './containers/navigations';
+
+import Content from './containers/content';
 import PointApplay from './containers/point_applay';
+import Badge from './containers/badge.js';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(MainLayout);
@@ -25,6 +27,16 @@ export default function (injectDeps, {FlowRouter}) {
             mount(MainLayoutCtx, {
                 navigations: () => (<Navigations />),
                 content: () => (<PointApplay />)
+            });
+        }
+    });
+
+    FlowRouter.route('/badge', {
+        name: 'badge',
+        action() {
+            mount(MainLayoutCtx, {
+                navigations: () => (<Navigations />),
+                content: () => (<Badge />)
             });
         }
     });

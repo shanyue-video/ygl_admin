@@ -1,13 +1,13 @@
 import {useDeps, composeAll, composeWithTracker, compose} from 'mantra-core';
 
-import PointApplay from '../components/point_applay.jsx';
+import Badge from '../components/badge.jsx';
 
 export const composer = ({context}, onData) => {
     const {Meteor, Collections} = context();
 
-    if (Meteor.subscribe('applys.status').ready()) {
-        const applys = Collections.Applys.find({}, { sort: { createAt: -1 } }).fetch();
-        onData(null, {applys});
+    if (Meteor.subscribe('badges.list').ready()) {
+        const badges = Collections.Badges.find({}, { sort: { createAt: -1 } }).fetch();
+        onData(null, {badges});
     } else {
         onData(null, {});
     }
@@ -20,4 +20,4 @@ export const depsMapper = (context, actions) => ({
 export default composeAll(
     composeWithTracker(composer),
     useDeps(depsMapper)
-)(PointApplay);
+)(Badge);
