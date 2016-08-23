@@ -16,7 +16,29 @@ let AddButton = React.createClass({
         this.getFieldProps = this.props.form;
         return { visible: false };
     },
-    showModal() {
+    showModal(e) {
+        //const i = $('#picture');
+        //console.log($(e.currentTarget));
+        /*
+        let thumb;
+        try {
+            thumb = this.props.opId.thumb;
+        } catch (e) {
+            thumb = null;
+        }
+        if(thumb) {
+            //const t = '#'+this.props.opId._id+' #picture';
+            //console.log(t);
+            //console.log(e.$('#'+this.props.opId._id));
+            console.log(this.refs['inputRef']);
+            console.log(this.refs);
+            const input = this.refs['inputRef'];
+            input.parent().css({
+                "background-image": "url(" + thumb.base64 + ")"
+            });
+            input.attr("data-file", thumb.base64);
+        }
+        */
         this.setState({
             visible: true,
         });
@@ -60,6 +82,22 @@ let AddButton = React.createClass({
             that.attr("data-file", rst.base64);
         });
     },
+    inputRef(c) {
+        console.log(c);
+        //console.log(c.style);
+        //console.log(type(c));
+        console.log(this.props);
+        if (this.props.opId){
+            const thumb = this.props.opId.thumb;
+            c.style.backgroundImage = "url(" + thumb + ")";
+            console.log(c);
+            //$(c).parent().css({
+            //    "background-image": "url(" + thumb.base64 + ")"
+            //});
+            //$(c).attr("data-file", thumb.base64);
+            //c.
+        }
+    },
 
     render() {
         const { getFieldProps } = this.getFieldProps;
@@ -76,7 +114,7 @@ let AddButton = React.createClass({
         }
         const editorForm = (
             <Form>
-                <div className="ff-file">
+                <div ref={this.inputRef} className="ff-file">
                     <input onChange={this.onChange} type="file" id="picture" name="picture"
                         />
                 </div>
