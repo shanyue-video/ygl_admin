@@ -7,3 +7,4 @@ import Content from './content';
 import Navigations from './navigations';
 import PointApplay from './point_applay';
 import Badge from './badge';
+import Banners from './banners';

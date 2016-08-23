@@ -1,3 +1,5 @@
+import { HTTP } from 'meteor/http';
+
 const sms ={
     // uid=1234&auth=faea920f7412b5da7be0cf42b8c93759&mobile=13612345678&msg=hello&expid=0
     server: 'http://210.5.158.31:9011/hy/?',

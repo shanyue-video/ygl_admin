@@ -7,6 +7,7 @@ import Navigations from './containers/navigations';
 import Content from './containers/content';
 import PointApplay from './containers/point_applay';
 import Badge from './containers/badge.js';
+import Banners from './containers/banners.js';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(MainLayout);
@@ -37,6 +38,16 @@ export default function (injectDeps, {FlowRouter}) {
             mount(MainLayoutCtx, {
                 navigations: () => (<Navigations />),
                 content: () => (<Badge />)
+            });
+        }
+    });
+
+    FlowRouter.route('/banners', {
+        name: 'banners',
+        action() {
+            mount(MainLayoutCtx, {
+                navigations: () => (<Navigations />),
+                content: () => (<Banners />)
             });
         }
     });
