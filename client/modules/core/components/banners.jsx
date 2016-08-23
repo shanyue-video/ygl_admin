@@ -14,13 +14,14 @@ import lrz from 'lrz/dist/lrz.bundle.js';
 let AddButton = React.createClass({
     getInitialState() {
 
-        const { getFieldProps } = this.props.form;
-        this.fieldProps =
-            ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
-                console.log('--->filed');
-                console.log(this.props.opId);
-                return getFieldProps(s, {});
-            });
+        this.getFieldProps = this.props.form;
+        //this.fieldProps =
+        //    ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+                console.log('--->filedddd');
+        //        console.log(this.props.opId);
+                //return getFieldProps(s, {});
+            //});
+
 
         return { visible: false };
     },
@@ -62,6 +63,7 @@ let AddButton = React.createClass({
         });
     },
     handleCancel() {
+        this.props.form.resetFields();
         this.setState({
             visible: false,
         });
@@ -94,11 +96,39 @@ let AddButton = React.createClass({
     },
 
     render() {
-
+        /*
         const [descFiled, orderByFiled, detailFiled, groupFiled, statusFiled] = this.fieldProps;
+        console.log('<---filed');
+        console.log(descFiled);
+        console.log(descFiled);
+        console.log('filed--->');
+        const { getFieldProps } = this.props.form;
+        */
+
+        //const { getFieldProps } = this.props.form;
+        const { getFieldProps } = this.getFieldProps;
+        let fieldProps =
+                        ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+                            //console.log('--->filed');
+                            //console.log(this.props.opId);
+                            return getFieldProps(s, {});
+                        });
+        if (this.props.opId != undefined) {
+            //const { getFieldProps } = this.props.form;
+            fieldProps =
+                ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+                    //console.log('--->filed');
+                    //console.log(getFieldProps(s, {}));
+                    console.log('--->filedsss');
+                    console.log(this.props.opId);
+                    return getFieldProps(s, {'initialValue': this.props.opId[s]});
+                });
+            console.log('--->filed');
+            console.log(this.fieldProps);
+        }
 
         const editorForm = (
-            <Form onSubmit={this.handleSubmit}>
+            <Form>
                 <div className="ff-file">
                     <input onChange={this.onChange} type="file" id="picture" name="picture"
                         />
@@ -111,24 +141,24 @@ let AddButton = React.createClass({
                             labelCol={{ span: 10 }}
                             wrapperCol={{ span: 14 }}
                             >
-                            <Input placeholder="文字描述" size="default" type="text"
-                                {...descFiled} />
+                            <Input placeholder="文字描述" size="default" type="text" autoComplete="off"
+                                {...fieldProps[0]} />
                         </FormItem>
                         <FormItem
                             label="排序"
                             labelCol={{ span: 10 }}
                             wrapperCol={{ span: 14 }}
                             >
-                            <Input placeholder="排序" size="default"
-                                {...orderByFiled} />
+                            <Input placeholder="排序" size="default" autoComplete="off"
+                                {...getFieldProps('orderBy', {})} />
                         </FormItem>
                         <FormItem
                             label="内容"
                             labelCol={{ span: 10 }}
                             wrapperCol={{ span: 14 }}
                             >
-                            <Input type="textarea" placeholder="内容" autosize
-                                {...detailFiled} />
+                            <Input type="textarea" placeholder="内容" autosize autoComplete="off"
+                                {...getFieldProps('detail', {})} />
 
                         </FormItem>
                     </Col>
@@ -139,7 +169,7 @@ let AddButton = React.createClass({
                             wrapperCol={{ span: 14 }}
                             >
                             <Input placeholder="组" size="default"
-                                {...groupFiled} />
+                                {...getFieldProps('group', {})} />
                         </FormItem>
                         <FormItem
                             label="状态"
@@ -147,7 +177,7 @@ let AddButton = React.createClass({
                             wrapperCol={{ span: 14 }}
                             >
                             <Select style={{ width: 113 }} placeholder="请选择状态"
-                                {...statusFiled}>
+                                {...getFieldProps('status', {})}>
                                 <Option value="1">已上线</Option>
                                 <Option value="0">未上线</Option>
                             </Select>
@@ -157,7 +187,6 @@ let AddButton = React.createClass({
                             labelCol={{ span: 10 }}
                             wrapperCol={{ span: 14, offset: 10 }}
                             >
-                            <Button type="primary" htmlType="submit">保存</Button>
                         </FormItem>
                     </Col>
                 </Row>
@@ -167,8 +196,8 @@ let AddButton = React.createClass({
         return (
             <div>
                 <Button type="primary" onClick={this.showModal}>{this.props.text}</Button>
-                <Modal footer={<div/>} style={{ top: 40 }} title={this.props.text} visible={this.state.visible}
-                       onCancel={this.handleCancel}>
+                <Modal style={{ top: 40 }} title={this.props.text} visible={this.state.visible}
+                       onCancel={this.handleCancel} onOk={this.handleSubmit}>
                     {editorForm}
                 </Modal>
             </div>
