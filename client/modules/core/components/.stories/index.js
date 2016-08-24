@@ -9,3 +9,5 @@ import PointApplay from './point_applay';
 import Badge from './badge';
 import Banners from './banners';
 import Discuz from './discuz';
+import Doctor from './doctor';
+import Doctors from './doctors';
