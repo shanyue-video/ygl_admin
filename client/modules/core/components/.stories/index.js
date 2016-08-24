@@ -12,3 +12,4 @@ import Discuz from './discuz';
 import Doctor from './doctor';
 import Doctors from './doctors';
 import Members from './members';
+import News from './news';

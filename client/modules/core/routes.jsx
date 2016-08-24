@@ -11,6 +11,7 @@ import Banners from './containers/banners.js';
 import Discuz from './containers/discuz.js';
 import Doctors from './containers/doctors.js';
 import Members from './containers/members.js';
+import News from './containers/news.js';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(MainLayout);
@@ -81,6 +82,16 @@ export default function (injectDeps, {FlowRouter}) {
             mount(MainLayoutCtx, {
                 navigations: () => (<Navigations />),
                 content: () => (<Members />)
+            });
+        }
+    });
+
+    FlowRouter.route('/news', {
+        name: 'news',
+        action() {
+            mount(MainLayoutCtx, {
+                navigations: () => (<Navigations />),
+                content: () => (<News />)
             });
         }
     });
