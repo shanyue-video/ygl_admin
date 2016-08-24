@@ -4,6 +4,6 @@ import {check} from 'meteor/check';
 
 export default function () {
   Meteor.publish('referral.status', function () {
-    return Referrals.find({status:1});
+    return Referrals.find({status:1}, {fields: {"person.pictures": false}});
   });
 }

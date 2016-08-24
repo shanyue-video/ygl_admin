@@ -14,3 +14,4 @@ import Doctors from './doctors';
 import Members from './members';
 import News from './news';
 import Recommand from './recommand';
+import Referral from './referral';

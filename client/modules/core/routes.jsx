@@ -13,6 +13,7 @@ import Doctors from './containers/doctors.js';
 import Members from './containers/members.js';
 import News from './containers/news.js';
 import Recommand from './containers/recommand.js';
+import Referral from './containers/referral.js';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(MainLayout);
@@ -103,6 +104,16 @@ export default function (injectDeps, {FlowRouter}) {
             mount(MainLayoutCtx, {
                 navigations: () => (<Navigations />),
                 content: () => (<Recommand />)
+            });
+        }
+    });
+
+    FlowRouter.route('/referral', {
+        name: 'referral',
+        action() {
+            mount(MainLayoutCtx, {
+                navigations: () => (<Navigations />),
+                content: () => (<Referral />)
             });
         }
     });
