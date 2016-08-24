@@ -13,3 +13,4 @@ import Doctor from './doctor';
 import Doctors from './doctors';
 import Members from './members';
 import News from './news';
+import Recommand from './recommand';

@@ -12,6 +12,7 @@ import Discuz from './containers/discuz.js';
 import Doctors from './containers/doctors.js';
 import Members from './containers/members.js';
 import News from './containers/news.js';
+import Recommand from './containers/recommand.js';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(MainLayout);
@@ -92,6 +93,16 @@ export default function (injectDeps, {FlowRouter}) {
             mount(MainLayoutCtx, {
                 navigations: () => (<Navigations />),
                 content: () => (<News />)
+            });
+        }
+    });
+
+    FlowRouter.route('/recommand', {
+        name: 'recommand',
+        action() {
+            mount(MainLayoutCtx, {
+                navigations: () => (<Navigations />),
+                content: () => (<Recommand />)
             });
         }
     });
