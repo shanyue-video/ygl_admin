@@ -8,6 +8,7 @@ import Content from './containers/content';
 import PointApplay from './containers/point_applay';
 import Badge from './containers/badge.js';
 import Banners from './containers/banners.js';
+import Discuz from './containers/discuz.js';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(MainLayout);
@@ -48,6 +49,16 @@ export default function (injectDeps, {FlowRouter}) {
             mount(MainLayoutCtx, {
                 navigations: () => (<Navigations />),
                 content: () => (<Banners />)
+            });
+        }
+    });
+
+    FlowRouter.route('/discuz', {
+        name: 'discuz',
+        action() {
+            mount(MainLayoutCtx, {
+                navigations: () => (<Navigations />),
+                content: () => (<Discuz />)
             });
         }
     });
