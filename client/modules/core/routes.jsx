@@ -14,6 +14,7 @@ import Members from './containers/members.js';
 import News from './containers/news.js';
 import Recommand from './containers/recommand.js';
 import Referral from './containers/referral.js';
+import Region from './containers/region.js';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(MainLayout);
@@ -114,6 +115,16 @@ export default function (injectDeps, {FlowRouter}) {
             mount(MainLayoutCtx, {
                 navigations: () => (<Navigations />),
                 content: () => (<Referral />)
+            });
+        }
+    });
+
+    FlowRouter.route('/region', {
+        name: 'region',
+        action() {
+            mount(MainLayoutCtx, {
+                navigations: () => (<Navigations />),
+                content: () => (<Region />)
             });
         }
     });

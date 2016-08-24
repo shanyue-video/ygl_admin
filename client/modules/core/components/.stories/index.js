@@ -15,3 +15,4 @@ import Members from './members';
 import News from './news';
 import Recommand from './recommand';
 import Referral from './referral';
+import Region from './region';
