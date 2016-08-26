@@ -1,0 +1,20 @@
+{
+  "apps": [
+    {
+      "name": "admin2",
+      //"script": "./bundle/main.js",
+      "script": "main.js",
+      "log_date_format": "YYYY-MM-DD HH:mm Z",
+      "exec_mode": "fork_mode",
+      "env": {
+
+        "MONGO_URL": "mongodb://localhost:27017/ygl",
+
+        "PORT": "9000",
+
+        "ROOT_URL": "http://m.yigonglue.com",
+
+      }
+    }
+  ]
+}
