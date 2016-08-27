@@ -5,4 +5,4 @@ cp main.json ~/workplace/meteor_output/${filename}/
 cp server_build.sh ~/workplace/meteor_output/${filename}/
 cd ~/workplace/meteor_output
 scp -r ${filename} yjl:${server_path}
-ssh yjl "cd ${server_path}${filename};/bin/bash ${server_path}${filename}/server_build.sh"
+ssh yjl "cd ${server_path}${filename};nvm use v4.4.7;/bin/bash ${server_path}${filename}/server_build.sh"
