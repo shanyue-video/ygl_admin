@@ -27,8 +27,9 @@ export default function () {
                     _id: __id
                 });
                 upload(obj.thumb, function(data) {
+                    console.log('start insert new oss');
                     Banners.update({
-                        _id: args._id
+                        _id: args.__id
                     }, {
                         $set: {
                             "thumb": data
@@ -54,8 +55,11 @@ export default function () {
             const obj = args.obj;
             if(obj.thumb && obj.thumb.indexOf("base64") > -1) {
                 upload(obj.thumb, function(data) {
+                    //console.log('start update new oss');
+                    //console.log(data);
+                    //console.log(args);
                     Banners.update({
-                        _id: args._id
+                        _id: args.__id
                     }, {
                         $set: {
                             "thumb": data
