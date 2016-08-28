@@ -12,7 +12,38 @@ import lrz from 'lrz/dist/lrz.bundle.js';
 
 
 let AddButton = React.createClass({
+
+    componentWillMount() {
+        console.log('!!!');
+        const i = this.props.opId.master.sdepartment;
+        const j = 'x8gC3Ggbwfwzkgy5Y';
+        if(this.props.doctors) {
+            this.l = this.props.doctors.filter((o) => {return o.sdepartment == j});
+        }
+    },
     getInitialState() {
+        //console.log(this.props.opId.master.sdepartment);
+
+        //const i = this.props.opId.master.sdepartment;
+        ////console.log(i);
+        ////console.log(this.props.doctors);
+        ////console.log(this.props.doctors.find((o) => {
+        ////    return o._id == i;
+        ////}));
+        //const j = 'x8gC3Ggbwfwzkgy5Y';
+        //if(this.props.doctors) {
+        //    /*
+        //    console.log(this.props.doctors.filter((o) => {
+        //        //console.log(o);
+        //        //console.log(i);
+        //        return o.sdepartment == j;
+        //    }));
+        //    */
+        //    //this.l = this.props.doctors.filter((o) => {return o.sdepartment == j});
+        //    const l = this.props.doctors.filter((o) => {return o.sdepartment == j});
+        //    this.l = l;
+        //}
+
         this.getFieldProps = this.props.form;
         return { visible: false };
     },
@@ -40,105 +71,66 @@ let AddButton = React.createClass({
         if (this.props.opId == undefined) {
             Action.Banners.insert(obj);
         } else {
-            //console.log(this.props.opId);
             Action.Banners.update(obj, this.props.opId._id);
         }
         this.setState({
             visible: false,
         });
     },
-    onChange(event) {
-        var that = $(event.currentTarget);
-        lrz(event.currentTarget.files[0], {
-            width: 720
-        }).then(function(rst) {
-            that.parent().css({
-                "background-image": "url(" + rst.base64 + ")"
-            });
-            that.attr("data-file", rst.base64);
-        });
-    },
-    inputRef(c) {
-        if (this.props.opId){
-            const thumb = this.props.opId.thumb;
-            c.style.backgroundImage = "url(" + thumb + ")";
-            console.log(c);
-        }
-    },
-
     render() {
+
         const { getFieldProps } = this.getFieldProps;
-        let fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
-            return getFieldProps(s, {});
-        });
-        if (this.props.opId != undefined) {
-            fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
-                if(s == 'status')
-                    return getFieldProps(s, {'initialValue': this.props.opId[s]+''});
-                else
-                    return getFieldProps(s, {'initialValue': this.props.opId[s]});
+        //const l = this.l;
+        console.log(this.l);
+
+        let fieldProps = getFieldProps('choice', {});
+        let option_o;
+
+        if (this.props.opId != undefined && this.l != undefined) {
+            //fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+            //    if(s == 'status')
+            //        return getFieldProps(s, {'initialValue': this.props.opId[s]+''});
+            //    else
+            //        return getFieldProps(s, {'initialValue': this.props.opId[s]});
+            //});
+            //<Option value="0">待选择</Option>
+            //<Option value="1">已上线</Option>
+            //    <Option value="2">未上线</Option>
+            //    <Option value="3">未上线</Option>
+            //    <Option value="4">未上线</Option>
+            //    <Option value="5">未上线</Option>
+            //    <Option value="6">未上线</Option>
+            //    <Option value="7">未上线</Option>
+            fieldProps = getFieldProps('choice', {'initialValue': '0'});
+            const opthions = this.l.map((o) => {
+                return (<Option value={o._id}>{o.doctorName}</Option>);
             });
+            option_o = (
+                <Select placeholder="请选择医生"
+                    {...fieldProps}>
+                    <Option value="0">待选择</Option>
+                    {opthions}
+                </Select>
+            );
+        } else {
+            fieldProps = getFieldProps('choice', {'initialValue': '0'});
+            option_o = (
+                <Select placeholder="选择医生"
+                    {...fieldProps}>
+                    <Option value="0">待选择</Option>
+                </Select>
+            );
         }
         const editorForm = (
             <Form>
-                <div ref={this.inputRef} className="ff-file">
-                    <input onChange={this.onChange} type="file" id="picture" name="picture"
-                        />
-                </div>
-                <br />
-                <Row align='middle' gutter={16}>
-                    <Col sm={10}>
+                <Row align='middle'>
+                    <Col sm={24}>
                         <FormItem
-                            label="文字描述"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
+                            label="请选择医生"
+                            labelCol={{ span: 6 }}
+                            wrapperCol={{ span: 16 }}
                             >
-                            <Input placeholder="文字描述" size="default" type="text" autoComplete="off"
-                                {...fieldProps[0]} />
-                        </FormItem>
-                        <FormItem
-                            label="排序"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
-                            >
-                            <Input placeholder="排序" size="default" autoComplete="off"
-                                {...fieldProps[1]} />
-                        </FormItem>
-                        <FormItem
-                            label="内容"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
-                            >
-                            <Input type="textarea" placeholder="内容" autosize autoComplete="off"
-                                {...fieldProps[2]} />
-
-                        </FormItem>
-                    </Col>
-                    <Col sm={10} offset={2}>
-                        <FormItem
-                            label="组"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
-                            >
-                            <Input placeholder="组" size="default"
-                                {...fieldProps[3]} />
-                        </FormItem>
-                        <FormItem
-                            label="状态"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
-                            >
-                            <Select style={{ width: 113 }} placeholder="请选择状态"
-                                {...fieldProps[4]}>
-                                <Option value="1">已上线</Option>
-                                <Option value="0">未上线</Option>
-                            </Select>
-                        </FormItem>
-                        <FormItem
-                            lable=""
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14, offset: 10 }}
-                            >
+                                {option_o}
                         </FormItem>
                     </Col>
                 </Row>
@@ -167,6 +159,8 @@ class Referral extends React.Component {
     render() {
         let rawData = this.props.referrals; //.toString();
         const data = rawData;
+
+        const doctors = this.props.doctors;
 
         const columns = [{
             title: '创建时间',
@@ -201,7 +195,7 @@ class Referral extends React.Component {
                     return "未付款";
                 } else if (!r.checkAdmin) {
                     //return "<a onclick='jz(\"" + r._id + "\")'>未指定</a>";
-                    return (<AddButton text='未指定' opId={r} />);
+                    return (<AddButton text='未指定' opId={r} doctors={doctors} />);
                 } else if (r.checkRef) {
                     //return "<a onclick='jz(\"" + r._id + "\")'>已拒绝</a>";
                     return (<AddButton text='已拒绝' opId={r} />);
