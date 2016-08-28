@@ -13,38 +13,11 @@ import lrz from 'lrz/dist/lrz.bundle.js';
 
 let AddButton = React.createClass({
 
-    componentWillMount() {
-        console.log('!!!');
-        const i = this.props.opId.master.sdepartment;
-        const j = 'x8gC3Ggbwfwzkgy5Y';
-        if(this.props.doctors) {
-            this.l = this.props.doctors.filter((o) => {return o.sdepartment == j});
-        }
-    },
+    //componentWillMount() {
+    //
+    //},
     getInitialState() {
-        //console.log(this.props.opId.master.sdepartment);
-
-        //const i = this.props.opId.master.sdepartment;
-        ////console.log(i);
-        ////console.log(this.props.doctors);
-        ////console.log(this.props.doctors.find((o) => {
-        ////    return o._id == i;
-        ////}));
-        //const j = 'x8gC3Ggbwfwzkgy5Y';
-        //if(this.props.doctors) {
-        //    /*
-        //    console.log(this.props.doctors.filter((o) => {
-        //        //console.log(o);
-        //        //console.log(i);
-        //        return o.sdepartment == j;
-        //    }));
-        //    */
-        //    //this.l = this.props.doctors.filter((o) => {return o.sdepartment == j});
-        //    const l = this.props.doctors.filter((o) => {return o.sdepartment == j});
-        //    this.l = l;
-        //}
-
-        this.getFieldProps = this.props.form;
+        //this.getFieldProps = this.props.form;
         return { visible: false };
     },
     showModal(e) {
@@ -64,46 +37,33 @@ let AddButton = React.createClass({
         });
     },
     handleSubmit() {
-        const { desc, orderBy, detail, group, status } = this.props.form.getFieldsValue();
-        const thumb = $('#picture').attr("data-file");
-        const createAt = new Date();
-        const obj = {desc, orderBy, detail, group, status: parseInt(status), thumb, createAt};
-        if (this.props.opId == undefined) {
-            Action.Banners.insert(obj);
-        } else {
-            Action.Banners.update(obj, this.props.opId._id);
-        }
+        const o_submit = this.props.form.getFieldsValue();
+        console.log(Object.keys(o_submit)[0]);
+        console.log(this.props.opId._id);
+        console.log(o_submit[this.props.opId._id]);
+
+        Action.Referral.update_referral(this.props.opId._id, o_submit[this.props.opId._id]);
+
         this.setState({
             visible: false,
         });
     },
     render() {
 
-        const { getFieldProps } = this.getFieldProps;
-        //const l = this.l;
-        console.log(this.l);
+        const {getFieldProps} = this.props.form;
+        let fieldProps;
+        const i = this.props.opId.master.sdepartment;
+        const j = 'x8gC3Ggbwfwzkgy5Y';
+        let l;
+        if(this.props.doctors) {
+            l = this.props.doctors.filter((o) => {return o.sdepartment == i && o.vaild == 1 && o.master == 1});
+        }
 
-        let fieldProps = getFieldProps('choice', {});
         let option_o;
-
-        if (this.props.opId != undefined && this.l != undefined) {
-            //fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
-            //    if(s == 'status')
-            //        return getFieldProps(s, {'initialValue': this.props.opId[s]+''});
-            //    else
-            //        return getFieldProps(s, {'initialValue': this.props.opId[s]});
-            //});
-            //<Option value="0">待选择</Option>
-            //<Option value="1">已上线</Option>
-            //    <Option value="2">未上线</Option>
-            //    <Option value="3">未上线</Option>
-            //    <Option value="4">未上线</Option>
-            //    <Option value="5">未上线</Option>
-            //    <Option value="6">未上线</Option>
-            //    <Option value="7">未上线</Option>
-            fieldProps = getFieldProps('choice', {'initialValue': '0'});
-            const opthions = this.l.map((o) => {
-                return (<Option value={o._id}>{o.doctorName}</Option>);
+        if (this.props.opId != undefined && l != undefined) {
+            fieldProps = getFieldProps(this.props.opId._id, {'initialValue': '0'});
+            const opthions = l.map((o) => {
+                return (<Option key={o._id} value={o._id}>{o.doctorName}</Option>);
             });
             option_o = (
                 <Select placeholder="请选择医生"
@@ -113,7 +73,7 @@ let AddButton = React.createClass({
                 </Select>
             );
         } else {
-            fieldProps = getFieldProps('choice', {'initialValue': '0'});
+            fieldProps = getFieldProps(this.props.opId._id, {'initialValue': '0'});
             option_o = (
                 <Select placeholder="选择医生"
                     {...fieldProps}>
@@ -121,6 +81,8 @@ let AddButton = React.createClass({
                 </Select>
             );
         }
+        this.option_o = option_o;
+
         const editorForm = (
             <Form>
                 <Row align='middle'>
@@ -130,7 +92,7 @@ let AddButton = React.createClass({
                             labelCol={{ span: 6 }}
                             wrapperCol={{ span: 16 }}
                             >
-                                {option_o}
+                            {this.option_o}
                         </FormItem>
                     </Col>
                 </Row>
@@ -198,10 +160,10 @@ class Referral extends React.Component {
                     return (<AddButton text='未指定' opId={r} doctors={doctors} />);
                 } else if (r.checkRef) {
                     //return "<a onclick='jz(\"" + r._id + "\")'>已拒绝</a>";
-                    return (<AddButton text='已拒绝' opId={r} />);
+                    return (<AddButton text='已拒绝' opId={r} doctors={doctors} />);
                 } else if (!r.checkMaster) {
                     //return "<a onclick='jz(\"" + r._id + "\")'>未确认</a>";
-                    return (<AddButton text='未确认' opId={r} />);
+                    return (<AddButton text='未确认' opId={r} doctors={doctors} />);
                 } else if (!r.checkCase) {
                     return "未就诊";
                 } else if (!r.checkVisit) {
