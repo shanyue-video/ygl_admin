@@ -41,6 +41,8 @@ export default function () {
             });
         },
         'banner_update'(args) {
+            //return 'success'+args.__id;
+            ///*
             Banners.update({
                 _id: args.__id
             }, {
@@ -55,9 +57,9 @@ export default function () {
             const obj = args.obj;
             if(obj.thumb && obj.thumb.indexOf("base64") > -1) {
                 upload(obj.thumb, function(data) {
-                    //console.log('start update new oss');
-                    //console.log(data);
-                    //console.log(args);
+                    console.log('start update new oss');
+                    console.log(data);
+                    console.log(args);
                     Banners.update({
                         _id: args.__id
                     }, {
@@ -69,6 +71,7 @@ export default function () {
                     throw e;
                 });
             }
+            //*/
         }
     });
 }

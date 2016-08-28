@@ -25,9 +25,9 @@ export default function () {
             const salt = user.salt;
             var md5 = CryptoJS.MD5(args.password + salt).toString();
 
-            //if (md5 != user.password) {
-            //    return "ERROR_PWD";
-            //}
+            if (md5 != user.password) {
+                return "ERROR_PWD";
+            }
 
             this.setUserId(user._id);
 

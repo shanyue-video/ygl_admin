@@ -1,5 +1,5 @@
 filename=$(date +%Y%m%d%H%M%S)
-server_path="/alidata/www/ygl/"
+server_path="/data1/admin/"
 meteor build --server-only --server="http://m.yigonglue.com" ~/workplace/meteor_output/${filename}
 cp main.json ~/workplace/meteor_output/${filename}/
 cp server_build.sh ~/workplace/meteor_output/${filename}/
