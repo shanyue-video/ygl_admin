@@ -17,7 +17,7 @@ let AddButton = React.createClass({
     //    Action.Doctors.getCert(this.props.opId._id);
     //},
     getInitialState() {
-        console.log(Collections.Doctors.findOne({_id: this.props.opId._id}));
+        //console.log(Collections.Doctors.findOne({_id: this.props.opId._id}));
         this.getFieldProps = this.props.form;
         return { visible: false };
     },
