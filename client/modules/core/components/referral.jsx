@@ -13,11 +13,7 @@ import lrz from 'lrz/dist/lrz.bundle.js';
 
 let AddButton = React.createClass({
 
-    //componentWillMount() {
-    //
-    //},
     getInitialState() {
-        //this.getFieldProps = this.props.form;
         return { visible: false };
     },
     showModal(e) {
@@ -53,7 +49,6 @@ let AddButton = React.createClass({
         const {getFieldProps} = this.props.form;
         let fieldProps;
         const i = this.props.opId.master.sdepartment;
-        const j = 'x8gC3Ggbwfwzkgy5Y';
         let l;
         if(this.props.doctors) {
             l = this.props.doctors.filter((o) => {return o.sdepartment == i && o.vaild == 1 && o.master == 1});
@@ -156,13 +151,10 @@ class Referral extends React.Component {
                 if (!r.checkPay) {
                     return "未付款";
                 } else if (!r.checkAdmin) {
-                    //return "<a onclick='jz(\"" + r._id + "\")'>未指定</a>";
                     return (<AddButton text='未指定' opId={r} doctors={doctors} />);
                 } else if (r.checkRef) {
-                    //return "<a onclick='jz(\"" + r._id + "\")'>已拒绝</a>";
                     return (<AddButton text='已拒绝' opId={r} doctors={doctors} />);
                 } else if (!r.checkMaster) {
-                    //return "<a onclick='jz(\"" + r._id + "\")'>未确认</a>";
                     return (<AddButton text='未确认' opId={r} doctors={doctors} />);
                 } else if (!r.checkCase) {
                     return "未就诊";
