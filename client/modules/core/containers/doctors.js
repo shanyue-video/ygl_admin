@@ -5,7 +5,7 @@ import Doctors from '../components/doctors.jsx';
 export const composer = ({context}, onData) => {
     const {Meteor, Collections} = context();
 
-    if (Meteor.subscribe('doctors.list').ready()) {
+    if (Meteor.subscribe('doctors.all_list').ready()) {
         const doctors = Collections.Doctors.find({}, { sort: { createAt: -1 } }).fetch();
         onData(null, {doctors});
     } else {

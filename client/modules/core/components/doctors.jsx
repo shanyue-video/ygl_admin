@@ -14,9 +14,9 @@ import * as Collections from '/lib/collections';
 
 let AddButton = React.createClass({
     getInitialState() {
-        if (this.props.opId) {
-            Action.Doctors.getCert(this.props.opId._id);
-        }
+        //if (this.props.opId) {
+        //    Action.Doctors.getCert(this.props.opId._id);
+        //}
         this.getFieldProps = this.props.form;
         return { visible: false };
     },
@@ -63,10 +63,10 @@ let AddButton = React.createClass({
         });
     },
     inputRef(c) {
-        if (this.props.opId){
+        if (this.props.opId && c){
             const doctor = Collections.Doctors.findOne({_id: this.props.opId._id});
             c.style.backgroundImage = "url(" + doctor.cert + ")";
-            //console.log(c);
+            console.log(c.style.backgroundImage);
         }
     },
     render() {
@@ -84,7 +84,7 @@ let AddButton = React.createClass({
         }
         const editorForm = (
             <Form>
-                <div ref={this.inputRef} className="ff-file">
+                <div ref={this.inputRef} className="ff-file-cert">
                     <input onChange={this.onChange} type="file" id="picture" name="picture"
                         />
                 </div>
