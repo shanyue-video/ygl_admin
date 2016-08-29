@@ -9,6 +9,7 @@ import uploadNewsThumb from './upload_news_thumb';
 import notifyReferral from './notify_referral';
 import uploadRecordsTablesThumb from './upload_records_tables_thumb';
 import uploadhospitalThumb from './uploadhospital_thumb';
+import getDoctorCert from './get_doctor_cert';
 
 export default function () {
   accountLoginWithTel();
@@ -22,4 +23,5 @@ export default function () {
   notifyReferral();
   uploadRecordsTablesThumb();
   uploadhospitalThumb();
+  getDoctorCert();
 }

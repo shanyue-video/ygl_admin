@@ -9,9 +9,14 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 
 import Action from '../actions/index.js'
+import * as Collections from '/lib/collections';
+
 
 let AddButton = React.createClass({
     getInitialState() {
+        if (this.props.opId) {
+            Action.Doctors.getCert(this.props.opId._id);
+        }
         this.getFieldProps = this.props.form;
         return { visible: false };
     },
@@ -59,9 +64,9 @@ let AddButton = React.createClass({
     },
     inputRef(c) {
         if (this.props.opId){
-            const thumb = this.props.opId.thumb;
-            c.style.backgroundImage = "url(" + thumb + ")";
-            console.log(c);
+            const doctor = Collections.Doctors.findOne({_id: this.props.opId._id});
+            c.style.backgroundImage = "url(" + doctor.cert + ")";
+            //console.log(c);
         }
     },
     render() {
@@ -83,63 +88,6 @@ let AddButton = React.createClass({
                     <input onChange={this.onChange} type="file" id="picture" name="picture"
                         />
                 </div>
-                <br />
-                <Row align='middle' gutter={16}>
-                    <Col sm={10}>
-                        <FormItem
-                            label="文字描述"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
-                            >
-                            <Input placeholder="文字描述" size="default" type="text" autoComplete="off"
-                                {...fieldProps[0]} />
-                        </FormItem>
-                        <FormItem
-                            label="排序"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
-                            >
-                            <Input placeholder="排序" size="default" autoComplete="off"
-                                {...fieldProps[1]} />
-                        </FormItem>
-                        <FormItem
-                            label="内容"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
-                            >
-                            <Input type="textarea" placeholder="内容" autosize autoComplete="off"
-                                {...fieldProps[2]} />
-
-                        </FormItem>
-                    </Col>
-                    <Col sm={10} offset={2}>
-                        <FormItem
-                            label="组"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
-                            >
-                            <Input placeholder="组" size="default"
-                                {...fieldProps[3]} />
-                        </FormItem>
-                        <FormItem
-                            label="状态"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
-                            >
-                            <Select style={{ width: 113 }} placeholder="请选择状态"
-                                {...fieldProps[4]}>
-                                <Option value="1">已上线</Option>
-                                <Option value="0">未上线</Option>
-                            </Select>
-                        </FormItem>
-                        <FormItem
-                            lable=""
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14, offset: 10 }}
-                            >
-                        </FormItem>
-                    </Col>
-                </Row>
             </Form>
         );
 
@@ -176,7 +124,7 @@ class Doctors extends React.Component {
             title: '医院科室',
             render: function(r, d) {
 
-                return r.departmentName + " " + r.sdepartmentName;
+                return r.hospitalName + " " + r.departmentName + " " + r.sdepartmentName;
             }
         }, {
             title: '创建时间',
@@ -216,6 +164,11 @@ class Doctors extends React.Component {
                     return (<AddButton opId={r} text='待认证'/>);
                 }
             }
+        //},{
+        //    title: '编辑',
+        //    render: function(r, d) {
+        //        return (<AddButton opId={r} text='修改信息'/>);
+        //    }
         }];
 
         return (

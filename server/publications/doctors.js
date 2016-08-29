@@ -3,7 +3,10 @@ import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
 export default function () {
-  Meteor.publish('doctors.list', function () {
-    return Doctors.find({},{fields: {cert: false}});
-  });
+    Meteor.publish('doctors.list', function () {
+        return Doctors.find({},{fields: {cert: false}});
+    });
+    Meteor.publish('doctors.list.all', function (doctor_id) {
+        return Doctors.find({_id: doctor_id});
+    });
 }
