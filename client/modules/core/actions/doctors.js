@@ -4,7 +4,15 @@ import { Tracker } from 'meteor/tracker'
 export default {
     getCert(doctor_id) {
         Tracker.autorun(() => {
-            Meteor.subscribe('doctors.list.all', doctor_id).ready()
+            Meteor.subscribe('doctors.list.all', doctor_id);
+        });
+    },
+    updateCert(doctor_id, thumb) {
+        Meteor.call("update_cert", {doctor_id, thumb}, (err, result) => {
+            console.log('err--->');
+            console.log(err);
+            console.log('result--->');
+            console.log(result);
         });
     }
 }

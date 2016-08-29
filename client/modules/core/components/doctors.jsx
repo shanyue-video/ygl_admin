@@ -13,10 +13,11 @@ import * as Collections from '/lib/collections';
 
 
 let AddButton = React.createClass({
+    //componentWillMount() {
+    //    Action.Doctors.getCert(this.props.opId._id);
+    //},
     getInitialState() {
-        //if (this.props.opId) {
-        //    Action.Doctors.getCert(this.props.opId._id);
-        //}
+        console.log(Collections.Doctors.findOne({_id: this.props.opId._id}));
         this.getFieldProps = this.props.form;
         return { visible: false };
     },
@@ -37,16 +38,13 @@ let AddButton = React.createClass({
         });
     },
     handleSubmit() {
-        const { desc, orderBy, detail, group, status } = this.props.form.getFieldsValue();
         const thumb = $('#picture').attr("data-file");
-        const createAt = new Date();
-        const obj = {desc, orderBy, detail, group, status: parseInt(status), thumb, createAt};
-        if (this.props.opId == undefined) {
-            Action.Banners.insert(obj);
-        } else {
-            //console.log(this.props.opId);
-            Action.Banners.update(obj, this.props.opId._id);
-        }
+        Action.Doctors.updateCert(this.props.opId._id, thumb);
+        //if (this.props.opId == undefined) {
+        //    Action.Banners.insert(obj);
+        //} else {
+        //    Action.Banners.update(obj, this.props.opId._id);
+        //}
         this.setState({
             visible: false,
         });
@@ -164,11 +162,6 @@ class Doctors extends React.Component {
                     return (<AddButton opId={r} text='待认证'/>);
                 }
             }
-        //},{
-        //    title: '编辑',
-        //    render: function(r, d) {
-        //        return (<AddButton opId={r} text='修改信息'/>);
-        //    }
         }];
 
         return (

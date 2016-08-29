@@ -41,19 +41,11 @@ export default function () {
             });
         },
         'banner_update'(args) {
-            //return 'success'+args.__id;
-            ///*
             Banners.update({
                 _id: args.__id
             }, {
                 $set: args.obj
             });
-            //console.log('---');
-            //console.log(__id);
-            //console.log(x);
-            //var obj = Banners.findOne({
-            //    _id: __id
-            //});
             const obj = args.obj;
             if(obj.thumb && obj.thumb.indexOf("base64") > -1) {
                 upload(obj.thumb, function(data) {
@@ -71,7 +63,6 @@ export default function () {
                     throw e;
                 });
             }
-            //*/
         }
     });
 }
