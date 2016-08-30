@@ -59,10 +59,11 @@ let AddButton = React.createClass({
         });
     },
     inputRef(c) {
-        if (this.props.opId){
+        if (this.props.opId && c){
             const thumb = this.props.opId.thumb;
             c.style.backgroundImage = "url(" + thumb + ")";
-            console.log(c);
+            $(c.children[0]).attr("data-file", thumb);
+            //console.log(c);
         }
     },
 
@@ -79,7 +80,7 @@ let AddButton = React.createClass({
                     return getFieldProps(s, {'initialValue': this.props.opId[s]});
             });
         }
-        const editorForm = (
+        const editorForm = this.state.visible ? (
             <Form>
                 <div ref={this.inputRef} className="ff-file">
                     <input onChange={this.onChange} type="file" id="picture" name="picture"
@@ -143,7 +144,7 @@ let AddButton = React.createClass({
                     </Col>
                 </Row>
             </Form>
-        );
+        ) : '';
 
         return (
             <div>
