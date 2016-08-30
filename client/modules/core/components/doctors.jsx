@@ -96,29 +96,14 @@ AddButton = Form.create()(AddButton);
 
 let ChoiceLever = React.createClass({
 
-    //getInitialState() {
-    //    const obj = this.props.obj;
-    //    return {select: obj.master};
-    //},
-
     handleChange(value) {
-        console.log('<----');
-        console.log(this.props.obj);
-        console.log(`selected ${value}`);
-        console.log(this.props.obj.master);
-        console.log('---->');
-        //Action.Doctors.updateMaster(this.props.obj._id, value);
-    },
-
-    selRef(c) {
-        //if(c)
-        //    c.value = this.props.obj.master.toString();
+        Action.Doctors.updateMaster(this.props.obj._id, value);
     },
 
     render() {
         const master = this.props.obj.master.toString();
         return (
-            <Select ref={this.selRef} value={master} style={{ width: 80 }} onChange={this.handleChange}>
+            <Select value={master} style={{ width: 80 }} onChange={this.handleChange}>
                 <Option key="0" value="0">普通</Option>
                 <Option key="1" value="1">高级</Option>
             </Select>
@@ -172,15 +157,6 @@ class Doctors extends React.Component {
         }, {
             title: '级别',
             render: function(r) {
-                /*
-                 if(!r.master){
-                 //return "<a onclick='level(\"" + r._id + "\",0)'>普通</a>";
-                 return (<AddButton opId={r} text='普通'/>);
-                 }else{
-                 //return "<a onclick='level(\"" + r._id + "\",1)'>高级</a>";
-                 return (<AddButton opId={r} text='高级'/>);
-                 }
-                 */
                 return (<ChoiceLever obj={r} />);
             }
         },{
