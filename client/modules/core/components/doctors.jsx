@@ -10,6 +10,7 @@ const Option = Select.Option;
 
 import Action from '../actions/index.js'
 import * as Collections from '/lib/collections';
+import lrz from 'lrz/dist/lrz.bundle.js';
 
 
 let AddButton = React.createClass({
