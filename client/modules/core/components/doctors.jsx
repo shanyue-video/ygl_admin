@@ -14,7 +14,7 @@ import * as Collections from '/lib/collections';
 
 let AddButton = React.createClass({
     getInitialState() {
-        this.getFieldProps = this.props.form;
+        //this.getFieldProps = this.props.form;
         return { visible: false };
     },
     showModal(e) {
@@ -29,6 +29,7 @@ let AddButton = React.createClass({
     },
     handleCancel() {
         this.props.form.resetFields();
+        //this.refs.form.reset();
         this.setState({
             visible: false,
         });
@@ -56,29 +57,30 @@ let AddButton = React.createClass({
             const doctor = Collections.Doctors.findOne({_id: this.props.opId._id});
             c.style.backgroundImage = "url(" + doctor.cert + ")";
             //console.log(c.style.backgroundImage);
+            console.log(this.props.opId);
         }
     },
     render() {
-        const { getFieldProps } = this.getFieldProps;
-        let fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
-            return getFieldProps(s, {});
-        });
-        if (this.props.opId != undefined) {
-            fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
-                if(s == 'status')
-                    return getFieldProps(s, {'initialValue': this.props.opId[s]+''});
-                else
-                    return getFieldProps(s, {'initialValue': this.props.opId[s]});
-            });
-        }
-        const editorForm = (
-            <Form>
+        //const { getFieldProps } = this.getFieldProps;
+        //let fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+        //    return getFieldProps(s, {});
+        //});
+        //if (this.props.opId != undefined) {
+        //    fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+        //        if(s == 'status')
+        //            return getFieldProps(s, {'initialValue': this.props.opId[s]+''});
+        //        else
+        //            return getFieldProps(s, {'initialValue': this.props.opId[s]});
+        //    });
+        //}
+        const editorForm = this.state.visible ? (
+            <Form ref="form">
                 <div ref={this.inputRef} className="ff-file-cert">
                     <input onChange={this.onChange} type="file" id="picture" name="picture"
                         />
                 </div>
             </Form>
-        );
+        ) : '';
 
         return (
             <div>
