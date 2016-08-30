@@ -53,11 +53,9 @@ let AddButton = React.createClass({
     inputRef(c) {
         if (this.props.opId && c){
             const doctor = Collections.Doctors.findOne({_id: this.props.opId._id});
-            //console.log(c.children[0]);
             $(c.children[0]).attr("data-file", doctor.cert);
             c.style.backgroundImage = "url(" + doctor.cert + ")";
             //console.log(c.style.backgroundImage);
-            //console.log(this.props.opId);
         }
     },
     render() {
