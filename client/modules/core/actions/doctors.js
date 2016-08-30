@@ -13,6 +13,9 @@ export default {
             console.log(err);
             console.log('result--->');
             console.log(result);
+            //if (result) {
+            //    alert('上传成功');
+            //}
         });
     },
     updateMaster(doctor_id, master) {

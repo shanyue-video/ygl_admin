@@ -29,6 +29,7 @@ export default function () {
                     throw e;
                 });
             }
+            return 'SUCCESS';
         }
     });
 }

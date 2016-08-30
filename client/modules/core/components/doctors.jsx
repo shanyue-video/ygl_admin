@@ -14,7 +14,6 @@ import * as Collections from '/lib/collections';
 
 let AddButton = React.createClass({
     getInitialState() {
-        //this.getFieldProps = this.props.form;
         return { visible: false };
     },
     showModal(e) {
@@ -29,7 +28,6 @@ let AddButton = React.createClass({
     },
     handleCancel() {
         this.props.form.resetFields();
-        //this.refs.form.reset();
         this.setState({
             visible: false,
         });
@@ -55,24 +53,14 @@ let AddButton = React.createClass({
     inputRef(c) {
         if (this.props.opId && c){
             const doctor = Collections.Doctors.findOne({_id: this.props.opId._id});
+            //console.log(c.children[0]);
+            $(c.children[0]).attr("data-file", doctor.cert);
             c.style.backgroundImage = "url(" + doctor.cert + ")";
             //console.log(c.style.backgroundImage);
-            console.log(this.props.opId);
+            //console.log(this.props.opId);
         }
     },
     render() {
-        //const { getFieldProps } = this.getFieldProps;
-        //let fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
-        //    return getFieldProps(s, {});
-        //});
-        //if (this.props.opId != undefined) {
-        //    fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
-        //        if(s == 'status')
-        //            return getFieldProps(s, {'initialValue': this.props.opId[s]+''});
-        //        else
-        //            return getFieldProps(s, {'initialValue': this.props.opId[s]});
-        //    });
-        //}
         const editorForm = this.state.visible ? (
             <Form ref="form">
                 <div ref={this.inputRef} className="ff-file-cert">
