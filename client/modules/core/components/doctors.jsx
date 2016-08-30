@@ -96,18 +96,31 @@ AddButton = Form.create()(AddButton);
 
 let ChoiceLever = React.createClass({
 
+    //getInitialState() {
+    //    const obj = this.props.obj;
+    //    return {select: obj.master};
+    //},
+
     handleChange(value) {
-        console.log(`selected ${value}`);
+        console.log('<----');
         console.log(this.props.obj);
-        Action.Doctors.updateMaster(this.props.obj._id, value);
+        console.log(`selected ${value}`);
+        console.log(this.props.obj.master);
+        console.log('---->');
+        //Action.Doctors.updateMaster(this.props.obj._id, value);
+    },
+
+    selRef(c) {
+        //if(c)
+        //    c.value = this.props.obj.master.toString();
     },
 
     render() {
-        const {obj} = this.props;
+        const master = this.props.obj.master.toString();
         return (
-            <Select defaultValue={obj.master.toString()} style={{ width: 80 }} onChange={this.handleChange}>
-                <Option value="0">普通</Option>
-                <Option value="1">高级</Option>
+            <Select ref={this.selRef} value={master} style={{ width: 80 }} onChange={this.handleChange}>
+                <Option key="0" value="0">普通</Option>
+                <Option key="1" value="1">高级</Option>
             </Select>
         );
     },
