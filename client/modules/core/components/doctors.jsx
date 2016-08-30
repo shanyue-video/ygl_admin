@@ -13,11 +13,7 @@ import * as Collections from '/lib/collections';
 
 
 let AddButton = React.createClass({
-    //componentWillMount() {
-    //    Action.Doctors.getCert(this.props.opId._id);
-    //},
     getInitialState() {
-        //console.log(Collections.Doctors.findOne({_id: this.props.opId._id}));
         this.getFieldProps = this.props.form;
         return { visible: false };
     },
@@ -40,11 +36,6 @@ let AddButton = React.createClass({
     handleSubmit() {
         const thumb = $('#picture').attr("data-file");
         Action.Doctors.updateCert(this.props.opId._id, thumb);
-        //if (this.props.opId == undefined) {
-        //    Action.Banners.insert(obj);
-        //} else {
-        //    Action.Banners.update(obj, this.props.opId._id);
-        //}
         this.setState({
             visible: false,
         });
@@ -64,7 +55,7 @@ let AddButton = React.createClass({
         if (this.props.opId && c){
             const doctor = Collections.Doctors.findOne({_id: this.props.opId._id});
             c.style.backgroundImage = "url(" + doctor.cert + ")";
-            console.log(c.style.backgroundImage);
+            //console.log(c.style.backgroundImage);
         }
     },
     render() {
@@ -139,7 +130,11 @@ class Doctors extends React.Component {
             title: '医师执照',
             render: function(r) {
                 //return "<a target='_blank' href='" +r.cert+ "'>打开</a>";
-                return (<AddButton opId={r} text='打开'/>);
+                if(r.cert){
+                    return (<AddButton opId={r} text='打开'/>);
+                } else {
+                    return (<AddButton opId={r} text='未上传'/>);
+                }
             }
         }, {
             title: '级别',
