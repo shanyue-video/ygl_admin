@@ -14,5 +14,16 @@ export default {
             console.log('result--->');
             console.log(result);
         });
+    },
+    updateMaster(doctor_id, master) {
+        master = parseInt(master);
+        //console.log(master);
+        Collections.Doctors.update({
+            _id: doctor_id
+        }, {
+            $set: {
+                'master': master
+            }
+        });
     }
 }
