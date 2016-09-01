@@ -93,8 +93,11 @@ let ChoiceLever = React.createClass({
         const master = this.props.obj.master.toString();
         return (
             <Select value={master} style={{ width: 80 }} onChange={this.handleChange}>
-                <Option key="0" value="0">普通</Option>
-                <Option key="1" value="1">高级</Option>
+                <Option key="0" value="0">普通医师</Option>
+                <Option key="1" value="1">主任医师</Option>
+                <Option key="1" value="1">住院医师</Option>
+                <Option key="1" value="1">主治医师</Option>
+                <Option key="1" value="1">副主任医师</Option>
             </Select>
         );
     },
