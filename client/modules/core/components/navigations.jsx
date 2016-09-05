@@ -34,6 +34,7 @@ class Navigations extends React.Component {
                 <Menu.Item key="referral">{<span><Icon type="mail" /><span>转诊单管理</span></span>}</Menu.Item>
                 <Menu.Item key="region">{<span><Icon type="mail" /><span>地区管理</span></span>}</Menu.Item>
                 <Menu.Item key="visits">{<span><Icon type="mail" /><span>随访模版</span></span>}</Menu.Item>
+                <Menu.Item key="suggest">{<span><Icon type="mail" /><span>反馈信息</span></span>}</Menu.Item>
             </Menu>
         );
     }

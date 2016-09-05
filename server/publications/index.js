@@ -14,6 +14,7 @@ import Hospitals from './hospitals';
 import Departments from './departments';
 import Badges from './badges';
 import Feilds from './feilds';
+import suggest from './suggest';
 
 export default function () {
   Applys();
@@ -32,4 +33,5 @@ export default function () {
   Departments();
   Badges();
   Feilds();
+  suggest();
 }

@@ -17,3 +17,4 @@ import Recommand from './recommand';
 import Referral from './referral';
 import Region from './region';
 import Visits from './visits';
+import suggest from './suggest';

@@ -16,6 +16,7 @@ import Recommand from './containers/recommand.js';
 import Referral from './containers/referral.js';
 import Region from './containers/region.js';
 import Visits from './containers/visits.js';
+import Suggest from './containers/suggest.js';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(MainLayout);
@@ -136,6 +137,16 @@ export default function (injectDeps, {FlowRouter}) {
             mount(MainLayoutCtx, {
                 navigations: () => (<Navigations />),
                 content: () => (<Visits />)
+            });
+        }
+    });
+
+    FlowRouter.route('/suggest', {
+        name: 'suggest',
+        action() {
+            mount(MainLayoutCtx, {
+                navigations: () => (<Navigations />),
+                content: () => (<Suggest />)
             });
         }
     });
