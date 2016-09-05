@@ -59,7 +59,7 @@ let AddButton = React.createClass({
         });
     },
     inputRef(c) {
-        if (this.props.opId){
+        if (this.props.opId && c){
             const thumb = this.props.opId.thumb;
             c.style.backgroundImage = "url(" + thumb + ")";
             console.log(c);
