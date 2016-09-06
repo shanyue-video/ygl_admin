@@ -1,7 +1,7 @@
 import {Doctors, Referrals} from '/lib/collections';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
-import {sms} from '/lib/model';
+import {sms} from '../configs';
 
 export default function () {
     Meteor.methods({
