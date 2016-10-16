@@ -16,6 +16,8 @@ export default function () {
         'notify_referral.send'(args) {
             const doctor = Doctors.findOne({_id: args.doctor_id});
             const ref = Referrals.findOne({_id: args.re_id});
+            //console.log(doctor);
+            //console.log(ref);
             Referrals.update({
                 _id: args.re_id
             }, {
@@ -32,6 +34,7 @@ export default function () {
                 var user = Meteor.users.findOne({_id:doctor.userid});
                 const message = `${user.nickname}主任，您好！您有一条待接诊信息请您及时处理。`;
                 sms.send(user.tel,message);
+                //sms.send('18515062140', message);
             }
         },
     });
