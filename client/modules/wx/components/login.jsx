@@ -15,28 +15,28 @@ let LoginForm = React.createClass({
     render() {
         const { getFieldProps } = this.props.form;
         const formItemLayout = {
-            labelCol: { span: 3 },
+            labelCol: { span: 5 },
             wrapperCol: { span: 18 },
         };
         return (
             <Form horizontal onSubmit={this.handleSubmit}>
                 <FormItem {...formItemLayout}
-                    label="账户"
+                    label="姓名"
                     >
-                    <Input placeholder="请输入账户名"
+                    <Input placeholder="请输入真实姓名"
                         {...getFieldProps('userName')}
                         />
                 </FormItem>
                 <FormItem {...formItemLayout}
-                    label="密码"
+                    label="身份证号"
                     >
-                    <Input type="password" placeholder="请输入密码"
+                    <Input type="password" placeholder="请输入生份证号码"
                         {...getFieldProps('password')}
                         />
                 </FormItem>
                 <Row>
-                    <Col span="18" offset="3">
-                        <Button type="primary" htmlType="submit">登录</Button>
+                    <Col span="14" offset="10">
+                        <Button type="primary" htmlType="submit">提交</Button>
                     </Col>
                 </Row>
             </Form>
@@ -54,10 +54,10 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                <div>
-                    账户登录
+                <div className="login-header">
+                    认证账户
                 </div>
-                <div>
+                <div className="page-login-body">
                     <LoginForm login={this.props.login} />
                 </div>
             </div>

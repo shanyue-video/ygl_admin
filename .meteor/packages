@@ -24,3 +24,4 @@ kadira:flow-router
 accounts-base@1.2.11
 jparker:crypto-md5
 http@1.2.9
+kadira:dochead
