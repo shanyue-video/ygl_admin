@@ -53,11 +53,11 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="login-single animated fadeInUp ">
-                <div className="login-header">
+            <div>
+                <div>
                     账户登录
                 </div>
-                <div className="page-login-body">
+                <div>
                     <LoginForm login={this.props.login} />
                 </div>
             </div>
