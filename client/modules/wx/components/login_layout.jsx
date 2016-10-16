@@ -18,7 +18,10 @@ class LoginLayout extends React.Component {
             //fontSize: 132,
         };
 
-        var metaInfo = {name: "viewport", content: "initial-scale=1"};
+        var metaInfo = {
+            name: "viewport",
+            content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;'
+        };
         DocHead.addMeta(metaInfo);
 
         return (
