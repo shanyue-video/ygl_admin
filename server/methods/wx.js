@@ -1,7 +1,7 @@
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 import { HTTP } from 'meteor/http';
-import {WxUser, Persons} from '/lib/collections'
+import {WxUser, Persons, WxChartHistory} from '/lib/collections'
 
 export default function () {
     Meteor.methods({
@@ -41,6 +41,18 @@ export default function () {
                     updateAt: new Date()
                 };
                 Persons.insert(insert_obj);
+            }
+        },
+        'wx.chart'(obj) {
+            const chart = WxChartHistory.findOne({_id: obj.wx_chart_history_id});
+            if (chart) {
+                WxChartHistory.update({_id: p._id}, {
+                    $addToSet: {
+                        message: obj.message,
+                        createAt: new Date(),
+                        from: 'user'
+                    }
+                });
             }
         }
     });

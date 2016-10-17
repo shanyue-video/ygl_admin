@@ -19,6 +19,7 @@ export const composer = ({context}, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
+    sendMessage: actions.login_form.sendMessage,
     context: () => context
 });
 

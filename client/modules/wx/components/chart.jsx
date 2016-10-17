@@ -14,6 +14,8 @@ class Chart extends React.Component {
         //var inputValue = this.refs.["message"].getDOMNode().value;
         //var inputValue = input.value;
         console.log(this.state.message);
+        console.log(this.props.wx_chart_history._id);
+        this.props.sendMessage(this.props.wx_chart_history._id, this.state.message);
     }
 
     onChange(e) {
