@@ -11,6 +11,7 @@ import uploadRecordsTablesThumb from './upload_records_tables_thumb';
 import uploadhospitalThumb from './uploadhospital_thumb';
 import getDoctorCert from './get_doctor_cert';
 import Doctors from './doctors';
+import wx from './wx';
 
 export default function () {
   accountLoginWithTel();
@@ -26,4 +27,5 @@ export default function () {
   uploadhospitalThumb();
   getDoctorCert();
   Doctors();
+  wx();
 }
