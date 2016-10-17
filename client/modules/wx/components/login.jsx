@@ -18,7 +18,7 @@ class Login extends React.Component {
                 <div className="login-header">
                     认证账户
                 </div>
-                <div className="page-login-body">
+                <div className="wx-page-login-body">
                     <LoginForm login={this.props.login} />
                 </div>
             </div>

@@ -31,7 +31,7 @@ let LoginForm = React.createClass({
         };
         return (
             <Form horizontal onSubmit={this.handleSubmit}>
-                <div style={{textAlign: 'center'}}>
+                <div style={{textAlign: 'center', marginBottom: '40px'}}>
                     {wx_user ? wx_user.data.nickname: ''}
                     <div>
                         <img height="80" width="80" src={wx_user ? wx_user.data.headimgurl: ''} />
