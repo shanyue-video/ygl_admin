@@ -5,6 +5,14 @@ const FormItem = Form.Item;
 
 let LoginForm = React.createClass({
 
+    getInitialState() {
+        //console.log(this);
+        //console.log('in getInitialState');
+        //console.log(this.props);
+        //console.log(this);
+        return {};
+    },
+
     handleSubmit(e) {
         e.preventDefault();
         const {userName, password} = this.props.form.getFieldsValue();
@@ -12,6 +20,10 @@ let LoginForm = React.createClass({
     },
 
     render() {
+        console.log(this.props.wx_user);
+
+        const wx_user = this.props.wx_user;
+
         const { getFieldProps } = this.props.form;
         const formItemLayout = {
             labelCol: { span: 5 },
@@ -19,8 +31,11 @@ let LoginForm = React.createClass({
         };
         return (
             <Form horizontal onSubmit={this.handleSubmit}>
-                <div>
-
+                <div style={{textAlign: 'center'}}>
+                    {wx_user ? wx_user.data.nickname: ''}
+                    <div>
+                        <img height="80" width="80" src={wx_user ? wx_user.data.headimgurl: ''} />
+                    </div>
                 </div>
                 <FormItem {...formItemLayout}
                     label="姓名"

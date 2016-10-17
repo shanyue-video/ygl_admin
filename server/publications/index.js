@@ -15,6 +15,7 @@ import Departments from './departments';
 import Badges from './badges';
 import Feilds from './feilds';
 import suggest from './suggest';
+import wx_user from './wx_user';
 
 export default function () {
   Applys();
@@ -34,4 +35,5 @@ export default function () {
   Badges();
   Feilds();
   suggest();
+  wx_user();
 }
