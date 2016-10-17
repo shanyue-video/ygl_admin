@@ -46,11 +46,13 @@ export default function () {
         'wx.chart'(obj) {
             const chart = WxChartHistory.findOne({_id: obj.wx_chart_history_id});
             if (chart) {
-                WxChartHistory.update({_id: p._id}, {
+                WxChartHistory.update({_id: chart._id}, {
                     $addToSet: {
-                        message: obj.message,
-                        createAt: new Date(),
-                        from: 'user'
+                        messages: {
+                            message:obj.message,
+                            createAt: new Date(),
+                            from: 'user'
+                        }
                     }
                 });
             }
