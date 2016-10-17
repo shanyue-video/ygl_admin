@@ -15,8 +15,8 @@ let LoginForm = React.createClass({
 
     handleSubmit(e) {
         e.preventDefault();
-        const {userName, password} = this.props.form.getFieldsValue();
-        this.props.login(userName, password);
+        const {userName, userNo} = this.props.form.getFieldsValue();
+        this.props.login(userName, userNo);
     },
 
     render() {
@@ -47,8 +47,8 @@ let LoginForm = React.createClass({
                 <FormItem {...formItemLayout}
                     label="身份证号"
                     >
-                    <Input type="password" placeholder="请输入身份证号码"
-                        {...getFieldProps('password')}
+                    <Input placeholder="请输入身份证号码"
+                        {...getFieldProps('userNo')}
                         />
                 </FormItem>
                 <Row>
