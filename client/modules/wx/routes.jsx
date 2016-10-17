@@ -3,6 +3,7 @@ import {mount} from 'react-mounter';
 
 import MainLayout from '/client/modules/wx/components/login_layout.jsx';
 import Login from './containers/login.js';
+import Chart from './containers/chart.js';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(MainLayout);
@@ -30,6 +31,15 @@ export default function (injectDeps, {FlowRouter}) {
         action() {
             mount(MainLayoutCtx, {
                 content: () => (<Login />)
+            });
+        }
+    });
+
+    wxRoutes.route('/chart', {
+        name: 'chart',
+        action() {
+            mount(MainLayoutCtx, {
+                content: () => (<Chart />)
             });
         }
     });

@@ -1,9 +1,9 @@
 export default {
-    auth({Meteor}, userName, userNo, wx_user_id) {
+    auth({Meteor, FlowRouter}, userName, userNo, wx_user_id) {
         Meteor.call('wx.auth', {userName, userNo, wx_user_id}, (error, result) => {
             if (!error) {
-                //console.log(result);
-                console.log('in action');
+                console.log('no error' + result);
+                FlowRouter.go(`/wx/chart?wx_user_id=${wx_user_id}`);
             }
         });
     }

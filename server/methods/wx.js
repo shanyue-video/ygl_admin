@@ -22,10 +22,8 @@ export default function () {
             });
         },
         'wx.auth'(obj) {
-            console.log(obj);
             const p = Persons.findOne({no: obj.userNo});
             if(p) {
-                //console.log(p);
                 let modify = {realName: obj.userName};
                 Persons.update({ _id: p._id }, {
                     $addToSet: {
@@ -34,7 +32,6 @@ export default function () {
                     $set:modify
                 });
             } else {
-                console.log('---');
                 const insert_obj = {
                     wx_users: [obj.wx_user_id],
                     no: obj.userNo,
