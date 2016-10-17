@@ -3,7 +3,7 @@ import {useDeps, composeAll, composeWithTracker, compose} from 'mantra-core';
 import LoginForm from '../components/login_form.jsx';
 
 export const composer = ({context}, onData) => {
-    const {Meteor, Collections} = context();
+    const {Meteor, FlowRouter, Collections} = context();
 
     const user_id = FlowRouter.getQueryParam('user_id');
     //console.log(user_id);

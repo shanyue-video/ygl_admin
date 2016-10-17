@@ -12,7 +12,7 @@ export default function (injectDeps, {FlowRouter}) {
         prefix: '/wx',
         name: 'wx',
         triggersEnter: [function(context, redirect) {
-            console.log('running group triggers');
+            //console.log('running group triggers');
         }]
     });
 

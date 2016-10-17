@@ -16,6 +16,7 @@ import Badges from './badges';
 import Feilds from './feilds';
 import suggest from './suggest';
 import wx_user from './wx_user';
+import wx_chart_history from './wx_chart_history';
 
 export default function () {
   Applys();
@@ -36,4 +37,5 @@ export default function () {
   Feilds();
   suggest();
   wx_user();
+  wx_chart_history();
 }
