@@ -11,8 +11,6 @@ export const composer = ({context}, onData) => {
 
     if (Meteor.subscribe('wx_user', user_id).ready()) {
         const wx_user = Collections.WxUser.find().fetch()[0];
-        //console.log(wx_user);
-        //console.log('wx_user');
         onData(null, {wx_user});
     } else {
         onData(null, {});
@@ -20,6 +18,7 @@ export const composer = ({context}, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
+    auth: actions.login_form.auth,
     context: () => context
 });
 

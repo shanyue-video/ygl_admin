@@ -6,22 +6,18 @@ const FormItem = Form.Item;
 let LoginForm = React.createClass({
 
     getInitialState() {
-        //console.log(this);
-        //console.log('in getInitialState');
-        //console.log(this.props);
-        //console.log(this);
         return {};
     },
 
     handleSubmit(e) {
         e.preventDefault();
         const {userName, userNo} = this.props.form.getFieldsValue();
-        this.props.login(userName, userNo);
+        const wx_user_id = this.props.wx_user._id;
+        this.props.auth(userName, userNo, wx_user_id);
     },
 
     render() {
-        console.log(this.props.wx_user);
-
+        //console.log(this.props.wx_user);
         const wx_user = this.props.wx_user;
 
         const { getFieldProps } = this.props.form;
