@@ -55,20 +55,10 @@ LoginForm = Form.create()(LoginForm);
 class Login extends React.Component {
     constructor(props) {
         super(props);
-
-        var Session = new ReactiveVar();
-
         const user_id = FlowRouter.getQueryParam('user_id');
         console.log(user_id);
-        //let user;
-        //HTTP.get(`http://yigonglue.com/wx_get_user?user_id=${user_id}`, (error, result) => {
-        //    if (!error) {
-        //        Session.set("user", result);
-        //    }
-        //});
         this.props.getUser(user_id);
         console.log('in client');
-        //console.log(Session.get("user"));
     }
 
     render() {

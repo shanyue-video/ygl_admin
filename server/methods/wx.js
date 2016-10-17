@@ -8,8 +8,6 @@ export default function () {
             HTTP.get(`http://yigonglue.com/wx_get_user?user_id=${user_id}`, (error, result) => {
                 if (!error) {
                     console.log(result);
-                    //console.log(Session.get("user"));
-                    //Session.set("user", result);
                 }
             });
         }
