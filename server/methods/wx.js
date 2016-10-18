@@ -47,8 +47,15 @@ export default function () {
             const chart = WxChartHistory.findOne({_id: obj.wx_chart_history_id});
             if (chart) {
                 const role = obj.role == 'doctor' ? 'user': 'doctor';
-                const url = "http://yigonglue.com/wx_send_message?user_id=" +
-                    chart.wx_user_id + "&doctor_openid=" + chart.doctor_id + "&role=" + role;
+                let url;
+                if(role == 'doctor') {
+                    url = "http://yigonglue.com/wx_send_message?user_id=" +
+                        chart.doctor_id + "&doctor_openid=" + chart.wx_user_id + "&role=" + role;
+                } else {
+                    url = "http://yigonglue.com/wx_send_message?user_id=" +
+                        chart.wx_user_id + "&doctor_openid=" + chart.doctor_id + "&role=" + role;
+                }
+
                 HTTP.get(url, (error, result) => {
                         if (!error) {
                             //const r_o = result;
@@ -63,7 +70,8 @@ export default function () {
                             createAt: new Date(),
                             from: obj.role
                         }
-                    }
+                    },
+                    $set: {init: false}
                 });
             }
         }

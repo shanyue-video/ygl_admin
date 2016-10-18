@@ -25,7 +25,7 @@ class Chart extends React.Component {
         const messageValue = this.state ? this.state.message: '';
 
         const chartMessages = [];
-        const messages = this.props.wx_chart_history ? this.props.wx_chart_history.messages: [];
+        const messages = (this.props.wx_chart_history && this.props.wx_chart_history.messages) ? this.props.wx_chart_history.messages: [];
         for(let i of messages) {
             let chartMessage;
             if(i.from == 'user') {

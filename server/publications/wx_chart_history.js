@@ -17,7 +17,8 @@ export default function () {
         if(wch.length == 0) {
             const init_his = {
                 wx_user_id: wx_user[0]._id,
-                doctor_id: wx_user[0].doctor_openid
+                doctor_id: wx_user[0].doctor_openid,
+                init: true
             };
             WxChartHistory.insert(init_his);
         }

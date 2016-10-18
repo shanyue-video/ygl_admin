@@ -9,7 +9,7 @@ export const composer = ({context}, onData) => {
 
     if (Meteor.subscribe('wx_chart_history', user_id, role).ready()) {
         const wx_chart_history = Collections.WxChartHistory.find().fetch()[0];
-        if (wx_chart_history) {
+        if (wx_chart_history && wx_chart_history.init) {
             console.log(wx_chart_history);
             FlowRouter.go(`/wx/chart?wx_user_id=${user_id}&role=${role}`);
         }
