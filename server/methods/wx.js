@@ -46,8 +46,10 @@ export default function () {
         'wx.chart'(obj) {
             const chart = WxChartHistory.findOne({_id: obj.wx_chart_history_id});
             if (chart) {
-                HTTP.get(`http://yigonglue.com/wx_send_message?user_id=${chart.wx_user_id}&doctor_openid=${chart.doctor_id}`,
-                    (error, result) => {
+                const role = obj.role == 'doctor' ? 'user': 'doctor';
+                const url = "http://yigonglue.com/wx_send_message?user_id=" +
+                    chart.wx_user_id + "&doctor_openid=" + chart.doctor_id + "&role=" + role;
+                HTTP.get(url, (error, result) => {
                         if (!error) {
                             //const r_o = result;
                             //console.log(r_o);
