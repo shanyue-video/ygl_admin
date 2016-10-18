@@ -10,7 +10,7 @@ class Chart extends React.Component {
     }
 
     onClick() {
-        this.props.sendMessage(this.props.wx_chart_history._id, this.state.message);
+        this.props.sendMessage(this.props.wx_chart_history._id, this.state.message, this.props.role);
         this.setState({message: ''});
     }
 
@@ -27,20 +27,35 @@ class Chart extends React.Component {
         const chartMessages = [];
         const messages = this.props.wx_chart_history ? this.props.wx_chart_history.messages: [];
         for(let i of messages) {
-            //console.log(i);
             let chartMessage;
             if(i.from == 'user') {
-                chartMessage = (
-                    <div key={i.createAt.getTime()} style={{textAlign: "right"}}>
-                        {i.createAt.toLocaleString()} {i.message}：我
-                    </div>
-                );
+                if (this.props.role != 'doctor') {
+                    chartMessage = (
+                        <div key={i.createAt.getTime()} style={{textAlign: "right"}}>
+                            {i.createAt.toLocaleString()} {i.message}：我
+                        </div>
+                    );
+                } else {
+                    chartMessage = (
+                        <div key={i.createAt.getTime()}>
+                            患者：{i.message} {i.createAt.toLocaleString()}
+                        </div>
+                    );
+                }
             } else if (i.from == 'doctor') {
-                chartMessage = (
-                    <div key={i.createAt.getTime()}>
-                        医生：{i.message} {i.createAt.toLocaleString()}
-                    </div>
-                );
+                if (this.props.role != 'doctor') {
+                    chartMessage = (
+                        <div key={i.createAt.getTime()}>
+                            医生：{i.message} {i.createAt.toLocaleString()}
+                        </div>
+                    );
+                } else {
+                    chartMessage = (
+                        <div key={i.createAt.getTime()} style={{textAlign: "right"}}>
+                            {i.createAt.toLocaleString()} {i.message}：我
+                        </div>
+                    );
+                }
             }
             chartMessages.push(chartMessage);
         }
@@ -48,7 +63,8 @@ class Chart extends React.Component {
         return (
             <div>
                 <div className="login-header">
-                    {this.props.wx_user ? this.props.wx_user.data.nickname: '未知'}医生
+                    {this.props.wx_user ? this.props.wx_user.data.nickname: '未知'}
+                    {this.props.role == 'doctor' ? '患者': '医生'}
                 </div>
                 <div className="wx-chart-login-body">
                     {chartMessages}

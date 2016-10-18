@@ -51,7 +51,7 @@ export default function () {
                         messages: {
                             message:obj.message,
                             createAt: new Date(),
-                            from: 'user'
+                            from: obj.role
                         }
                     }
                 });
