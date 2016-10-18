@@ -17,14 +17,13 @@ let LoginForm = React.createClass({
     },
 
     render() {
-        //console.log(this.props.wx_user);
         const wx_user = this.props.wx_user;
-
         const { getFieldProps } = this.props.form;
         const formItemLayout = {
             labelCol: { span: 5 },
             wrapperCol: { span: 18 },
         };
+
         return (
             <Form horizontal onSubmit={this.handleSubmit}>
                 <div style={{textAlign: 'center', marginBottom: '40px'}}>

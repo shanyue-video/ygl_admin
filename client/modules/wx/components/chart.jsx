@@ -10,9 +10,8 @@ class Chart extends React.Component {
     }
 
     onClick() {
-        console.log(this.state.message);
-        console.log(this.props.wx_chart_history._id);
         this.props.sendMessage(this.props.wx_chart_history._id, this.state.message);
+        this.setState({message: ''});
     }
 
     onChange(e) {
@@ -23,6 +22,7 @@ class Chart extends React.Component {
         const sendButton = (
             <Button type="primary" onClick={this.onClick} size="small">发送</Button>
         );
+        const messageValue = this.state ? this.state.message: '';
 
         const chartMessages = [];
         const messages = this.props.wx_chart_history ? this.props.wx_chart_history.messages: [];
@@ -55,7 +55,7 @@ class Chart extends React.Component {
                 </div>
                 <div style={{position: 'fixed', bottom: "0px"}}>
                     <Input ref='message' placeholder="输入聊天内容" onChange={this.onChange}
-                           addonAfter={sendButton}/>
+                           value={messageValue} addonAfter={sendButton}/>
                 </div>
             </div>
         );
