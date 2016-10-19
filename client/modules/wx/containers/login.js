@@ -5,19 +5,13 @@ import Login from '../components/login.jsx';
 export const composer = ({context}, onData) => {
     const {Meteor, Collections, FlowRouter} = context();
     const user_id = FlowRouter.getQueryParam('user_id');
-    //const role = 'user';
 
     if (Meteor.subscribe('wx_user', user_id).ready()) {
-        //const wx_chart_history = Collections.WxChartHistory.find().fetch()[0];
-        //if (wx_chart_history && wx_chart_history.init) {
-        //    console.log(wx_chart_history);
-        //    FlowRouter.go(`/wx/chart?wx_user_id=${user_id}&role=${role}`);
-        //}
         const wx_user = Collections.WxUser.find().fetch()[0];
         if (wx_user && wx_user.role == 'doctor') {
-            //WeixinJSBridge.invoke('closeWindow',{},function(res){
+            WeixinJSBridge.invoke('closeWindow',{},function(res){
                 alert('已经认证该医生');   //未来可以改成多用户聊天窗口选择的模式
-            //});
+            });
             return false;
         } else if (wx_user && wx_user.role == 'user') {
             FlowRouter.go(`/wx/chart?wx_user_id=${user_id}&role=user`);
