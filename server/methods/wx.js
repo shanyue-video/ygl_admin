@@ -1,7 +1,7 @@
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 import { HTTP } from 'meteor/http';
-import {WxUser, Persons, WxChartHistory} from '/lib/collections'
+import {WxUser, Doctors, Persons, WxChartHistory} from '/lib/collections'
 
 export default function () {
     Meteor.methods({
@@ -23,6 +23,18 @@ export default function () {
         },
         'wx.auth'(obj) {
             const p = Persons.findOne({no: obj.userNo});
+            const doctor = Doctors.findOne({no_id: obj.userNo});
+            if(doctor) {
+                Doctors.update({ _id: doctor._id }, {
+                    $addToSet: {
+                        wx_users: obj.wx_user_id
+                    }
+                });
+                WxUser.update({ _id: obj.wx_user_id }, {
+                    $set: {role: 'doctor'}
+                });
+                return 'doctor';
+            }
             if(p) {
                 let modify = {realName: obj.userName};
                 Persons.update({ _id: p._id }, {
@@ -42,18 +54,27 @@ export default function () {
                 };
                 Persons.insert(insert_obj);
             }
+            WxUser.update({ _id: obj.wx_user_id }, {
+                $set: {role: 'user'}
+            });
+            const wx_user = WxUser.findOne({_id: obj.wx_user_id});
+            if(wx_user.doctor_data) {
+                return 'user';
+            } else {
+                return 'toNone';
+            }
         },
         'wx.chart'(obj) {
             const chart = WxChartHistory.findOne({_id: obj.wx_chart_history_id});
             if (chart) {
-                const role = obj.role == 'doctor' ? 'user': 'doctor';
+                //const role = obj.role == 'doctor' ? 'user': 'doctor';
                 let url;
-                if(role == 'doctor') {
-                    url = "http://yigonglue.com/wx_send_message?user_id=" +
-                        chart.doctor_id + "&doctor_openid=" + chart.wx_user_id + "&role=" + role;
+                if(obj.role == 'doctor') {
+                    url = "http://yigonglue.com/wx_send_message?to_openid=" +
+                        chart.wx_user_id + "&from_openid=" + chart.doctor_id + "&role=" + obj.role;
                 } else {
-                    url = "http://yigonglue.com/wx_send_message?user_id=" +
-                        chart.wx_user_id + "&doctor_openid=" + chart.doctor_id + "&role=" + role;
+                    url = "http://yigonglue.com/wx_send_message?to_openid=" +
+                        chart.doctor_id + "&from_openid=" + chart.wx_user_id + "&role=" + obj.role;
                 }
 
                 HTTP.get(url, (error, result) => {

@@ -68,7 +68,7 @@ class Chart extends React.Component {
         return (
             <div>
                 <div className="login-header">
-                    {this.props.wx_user ? this.props.wx_user.data.nickname: '未知'}
+                    {this.props.wx_user && this.props.role == 'doctor' ? this.props.wx_user.doctor_data.nickname: this.props.wx_user.data.nickname}
                     {this.props.role == 'doctor' ? '患者': '医生'}
                 </div>
                 <div className="wx-chart-login-body">

@@ -7,9 +7,7 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         const user_id = FlowRouter.getQueryParam('user_id');
-        //console.log(user_id);
         this.props.getUser(user_id);
-        //console.log('in client');
     }
 
     render() {
