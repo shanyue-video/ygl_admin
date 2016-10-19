@@ -60,15 +60,19 @@ class Chart extends React.Component {
             chartMessages.push(chartMessage);
         }
 
-        //var user_name;
-        //if (this.props.role == 'doctor') {
-        //    user_name = this.props.wx_user;
-        //}
+        var user_name = '';
+        if (this.props.wx_user) {
+            if (this.props.role == 'doctor') {
+                user_name = this.props.wx_user.data.nickname;
+            } else {
+                user_name = this.props.wx_user.doctor_data.nickname;
+            }
+        }
 
         return (
             <div>
                 <div className="login-header">
-                    {this.props.wx_user && this.props.role == 'doctor' ? this.props.wx_user.doctor_data.nickname: this.props.wx_user.data.nickname}
+                    {user_name}
                     {this.props.role == 'doctor' ? '患者': '医生'}
                 </div>
                 <div className="wx-chart-login-body">
