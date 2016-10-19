@@ -60,6 +60,11 @@ class Chart extends React.Component {
             chartMessages.push(chartMessage);
         }
 
+        //var user_name;
+        //if (this.props.role == 'doctor') {
+        //    user_name = this.props.wx_user;
+        //}
+
         return (
             <div>
                 <div className="login-header">
