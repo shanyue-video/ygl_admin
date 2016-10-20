@@ -4,15 +4,15 @@ export default {
             if (!error) {
                 if (result == 'doctor') {
                     console.log('a doctor');
+                    alert('医生认证成功');
                     WeixinJSBridge.invoke('closeWindow',{},function(res){
-                        alert('医生认证成功');
                     });
                 } else if (result == 'user') {
                     console.log(`a ${result}`);
                     FlowRouter.go(`/wx/chart?wx_user_id=${wx_user_id}&role=${result}`);
                 } else if (result == 'toNone') {
+                    alert('请关注医生,进行咨询');
                     WeixinJSBridge.invoke('closeWindow',{},function(res){
-                        alert('请关注医生,进行咨询');
                     });
                 }
             }
