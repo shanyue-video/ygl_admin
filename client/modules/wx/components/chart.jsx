@@ -7,9 +7,6 @@ class Chart extends React.Component {
         super(props);
         this.onClick = this.onClick.bind(this);
         this.onChange = this.onChange.bind(this);
-
-        console.log('!!!');
-        console.log(this.props.wx_user);
     }
 
     onClick() {
@@ -33,11 +30,6 @@ class Chart extends React.Component {
             let chartMessage;
             if(i.from == 'user') {
                 if (this.props.role != 'doctor') {
-                    //chartMessage = (
-                    //    <div key={i.createAt.getTime()} style={{textAlign: "right"}}>
-                    //        {i.createAt.toLocaleString()} {i.message}：我
-                    //    </div>
-                    //);
                     let headimgurl = this.props.wx_user.data.headimgurl;
                     headimgurl = headimgurl ? headimgurl: '/avatar.png';
                     chartMessage = (
@@ -63,11 +55,6 @@ class Chart extends React.Component {
                         </div>
                     );
                 } else {
-                    //chartMessage = (
-                    //    <div key={i.createAt.getTime()}>
-                    //        患者：{i.message} {i.createAt.toLocaleString()}
-                    //    </div>
-                    //);
                     let headimgurl = this.props.wx_user.data.headimgurl;
                     headimgurl = headimgurl ? headimgurl: '/avatar.png';
                     chartMessage = (
@@ -95,11 +82,6 @@ class Chart extends React.Component {
                 }
             } else if (i.from == 'doctor') {
                 if (this.props.role != 'doctor') {
-                    //chartMessage = (
-                    //    <div key={i.createAt.getTime()}>
-                    //        医生：{i.message} {i.createAt.toLocaleString()}
-                    //    </div>
-                    //);
                     let headimgurl = this.props.wx_user.doctor_data.headimgurl;
                     headimgurl = headimgurl ? headimgurl: '/avatar.png';
                     chartMessage = (
