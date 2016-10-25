@@ -19,8 +19,8 @@ export const composer = ({context}, onData) => {
             const wx_user = Collections.WxUser.find().fetch()[0];
             onData(null, {wx_chart_history, wx_user, role});
         }
-    } else {
-        onData(null, {});
+    //} else {
+    //    onData(null, {});
     }
 };
 
