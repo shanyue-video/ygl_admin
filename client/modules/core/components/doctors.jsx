@@ -83,6 +83,85 @@ let AddButton = React.createClass({
 AddButton = Form.create()(AddButton);
 
 
+let EditButton = React.createClass({
+    getInitialState() {
+        this.getFieldProps = this.props.form;
+        return { visible: false };
+    },
+    showModal(e) {
+        this.setState({
+            visible: true,
+        });
+    },
+    handleOk() {
+        this.setState({
+            visible: false,
+        });
+    },
+    handleCancel() {
+        this.props.form.resetFields();
+        this.setState({
+            visible: false,
+        });
+    },
+    handleSubmit() {
+        const { doctorName, no_id } = this.props.form.getFieldsValue();
+        const obj = {doctorName, no_id};
+        console.log(obj);
+        Action.Doctors.updateOne(this.props.opId._id, obj);
+        this.setState({
+            visible: false,
+        });
+    },
+    render() {
+        const { getFieldProps } = this.getFieldProps;
+        let fieldProps = ['doctorName', 'no_id'].map((s) => {
+            return getFieldProps(s, {});
+        });
+        if (this.props.opId != undefined) {
+            fieldProps = ['doctorName', 'no_id'].map((s) => {
+                return getFieldProps(s, {'initialValue': this.props.opId[s]});
+            });
+        }
+        const editorForm = this.state.visible ? (
+            <Form ref="form">
+                <Row align='middle' gutter={16}>
+                    <Col sm={16}>
+                        <FormItem
+                            label="真实姓名"
+                            labelCol={{ span: 10 }}
+                            wrapperCol={{ span: 14 }}
+                            >
+                            <Input placeholder="真实姓名" size="default" type="text" autoComplete="off"
+                                {...fieldProps[0]} />
+                        </FormItem>
+                        <FormItem
+                            label="身份证号"
+                            labelCol={{ span: 10 }}
+                            wrapperCol={{ span: 14 }}
+                            >
+                            <Input placeholder="身份证号" size="default" autoComplete="off"
+                                {...fieldProps[1]} />
+                        </FormItem>
+                    </Col>
+                </Row>
+            </Form>
+        ) : '';
+
+        return (
+            <div>
+                <Button type="primary" onClick={this.showModal}>{this.props.text}</Button>
+                <Modal style={{ top: 40 }} title={this.props.text} visible={this.state.visible}
+                       onCancel={this.handleCancel} onOk={this.handleSubmit}>
+                    {editorForm}
+                </Modal>
+            </div>
+        );
+    },
+});
+EditButton = Form.create()(EditButton);
+
+
 let ChoiceLever = React.createClass({
 
     handleChange(value) {
@@ -160,6 +239,11 @@ class Doctors extends React.Component {
                     //return "<a onclick='pass(\"" + r._id + "\")'>待认证</a>";
                     return (<AddButton opId={r} text='待认证'/>);
                 }
+            }
+        },{
+            title: '编辑',
+            render: function(r, d) {
+                return (<EditButton opId={r} text='编辑'/>);
             }
         }];
 

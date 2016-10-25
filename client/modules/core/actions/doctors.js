@@ -18,6 +18,14 @@ export default {
             //}
         });
     },
+    updateOne(doctor_id, obj) {
+        console.log(doctor_id);
+        Collections.Doctors.update({
+            _id: doctor_id
+        }, {
+            $set: obj
+        });
+    },
     updateMaster(doctor_id, master) {
         master = parseInt(master);
         //console.log(master);
