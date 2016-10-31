@@ -5,8 +5,8 @@ import { Row, Col } from 'antd';
 class Message extends React.Component {
     constructor(props) {
         super(props);
-        console.log('!!!');
-        console.log(props);
+        //console.log('!!!');
+        //console.log(props);
     }
 
     render() {

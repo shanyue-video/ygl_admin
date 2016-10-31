@@ -26,7 +26,7 @@ class Chart extends React.Component {
         const messageValue = this.state ? this.state.message: '';
 
         const chartMessages = [];
-        const messages = (this.props.wx_chart_history && this.props.wx_chart_history.messages) ? this.props.wx_chart_history.messages: [];
+        const messages = this.props.wx_chart_history.messages ? this.props.wx_chart_history.messages: [];
         for(let i of messages) {
             let chartMessage;
             if(i.from == 'user') {
@@ -72,7 +72,7 @@ class Chart extends React.Component {
 
         return (
             <div>
-                <div className="login-header">
+                <div className="wx-chart-header">
                     {user_name}
                     {this.props.role == 'doctor' ? '患者': '医生'}
                 </div>
