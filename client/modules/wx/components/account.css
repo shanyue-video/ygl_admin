@@ -26,6 +26,7 @@
 	margin:0px auto;
 	padding:50px 10px 32px 10px;
     bottom: 50px;
+    background-color: white;
 }
 .wx-chart-header{
     position: fixed;
@@ -39,4 +40,5 @@
     font-size:14px;
     text-align: center;
     line-height:50px;
+    z-index:999;
 }

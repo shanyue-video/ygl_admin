@@ -1,6 +1,6 @@
 import React from 'react';
 import Message from './message.jsx'
-import { Input, Button, Row, Col } from 'antd';
+import { Input, Button } from 'antd';
 
 
 class Chart extends React.Component {

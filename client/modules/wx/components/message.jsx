@@ -2,6 +2,16 @@ import React from 'react';
 import { Row, Col } from 'antd';
 
 
+const iMessage = (message) => {
+    return (
+        <div className="message">
+            <span>{message}</span>
+            <div className="triangle-outer"></div>
+            <div className="triangle-inner"></div>
+        </div>
+    );
+};
+
 class Message extends React.Component {
     constructor(props) {
         super(props);
@@ -18,7 +28,7 @@ class Message extends React.Component {
             col1 = (
                 <Col span={21}>
                     <div> 我 {i.createAt.toLocaleString()}</div>
-                    <div> {i.message} </div>
+                    {iMessage(i.message)}
                 </Col>
             );
             col2 = (
@@ -62,7 +72,7 @@ class Message extends React.Component {
             col2 = (
                 <Col span={21} offset={1}>
                     <div> 患者 {i.createAt.toLocaleString()}</div>
-                    <div> {i.message} </div>
+                    {iMessage(i.message)}
                 </Col>
             );
             ret_div = (
@@ -92,7 +102,7 @@ class Message extends React.Component {
             col2 = (
                 <Col span={21} offset={1}>
                     <div> 医生 {i.createAt.toLocaleString()}</div>
-                    <div> {i.message} </div>
+                    {iMessage(i.message)}
                 </Col>
             );
             ret_div = (
@@ -108,7 +118,7 @@ class Message extends React.Component {
             col1 = (
                 <Col span={21}>
                     <div> 我 {i.createAt.toLocaleString()} </div>
-                    <div> {i.message} </div>
+                    {iMessage(i.message)}
                 </Col>
             );
             col2 = (
