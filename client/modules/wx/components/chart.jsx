@@ -1,4 +1,5 @@
 import React from 'react';
+import Message from './message.jsx'
 import { Input, Button, Row, Col } from 'antd';
 
 
@@ -33,51 +34,13 @@ class Chart extends React.Component {
                     let headimgurl = this.props.wx_user.data.headimgurl;
                     headimgurl = headimgurl ? headimgurl: '/avatar.png';
                     chartMessage = (
-                        <div key={i.createAt.getTime()} style={{textAlign: "right", marginTop: "10px"}}>
-                            <Row>
-                                <Col span={21}>
-                                    <div> 我 {i.createAt.toLocaleString()}</div>
-                                    <div> {i.message} </div>
-                                </Col>
-                                <Col span={2} offset={1}>
-                                    <div
-                                        style={{
-                                            width: "39px",
-                                            height: "39px",
-                                            position: "relative",
-                                            backgroundSize: "cover",
-                                            backgroundImage: "url("+ headimgurl +")"
-                                        }}
-                                        >
-                                    </div>
-                                </Col>
-                            </Row>
-                        </div>
+                        <Message key={i.createAt.getTime()} i={i} headimgurl={headimgurl} role={this.props.role}/>
                     );
                 } else {
                     let headimgurl = this.props.wx_user.data.headimgurl;
                     headimgurl = headimgurl ? headimgurl: '/avatar.png';
                     chartMessage = (
-                        <div key={i.createAt.getTime()} style={{marginTop: "10px"}}>
-                            <Row>
-                                <Col span={2}>
-                                    <div
-                                        style={{
-                                            width: "39px",
-                                            height: "39px",
-                                            position: "relative",
-                                            backgroundSize: "cover",
-                                            backgroundImage: "url("+ headimgurl +")"
-                                        }}
-                                        >
-                                    </div>
-                                </Col>
-                                <Col span={21} offset={1}>
-                                    <div> 患者 {i.createAt.toLocaleString()}</div>
-                                    <div> {i.message} </div>
-                                </Col>
-                            </Row>
-                        </div>
+                        <Message key={i.createAt.getTime()} i={i} headimgurl={headimgurl} role={this.props.role}/>
                     );
                 }
             } else if (i.from == 'doctor') {
@@ -85,51 +48,13 @@ class Chart extends React.Component {
                     let headimgurl = this.props.wx_user.doctor_data.headimgurl;
                     headimgurl = headimgurl ? headimgurl: '/avatar.png';
                     chartMessage = (
-                        <div key={i.createAt.getTime()} style={{marginTop: "10px"}}>
-                            <Row>
-                                <Col span={2}>
-                                    <div
-                                        style={{
-                                            width: "39px",
-                                            height: "39px",
-                                            position: "relative",
-                                            backgroundSize: "cover",
-                                            backgroundImage: "url("+ headimgurl +")"
-                                        }}
-                                        >
-                                    </div>
-                                </Col>
-                                <Col span={21} offset={1}>
-                                    <div> 医生 {i.createAt.toLocaleString()}</div>
-                                    <div> {i.message} </div>
-                                </Col>
-                            </Row>
-                        </div>
+                        <Message key={i.createAt.getTime()} i={i} headimgurl={headimgurl} role={this.props.role}/>
                     );
                 } else {
                     let headimgurl = this.props.wx_user.doctor_data.headimgurl;
                     headimgurl = headimgurl ? headimgurl: '/avatar.png';
                     chartMessage = (
-                        <div key={i.createAt.getTime()} style={{textAlign: "right", marginTop: "10px"}}>
-                            <Row>
-                                <Col span={21}>
-                                    <div> 我 {i.createAt.toLocaleString()} </div>
-                                    <div> {i.message} </div>
-                                </Col>
-                                <Col span={2} offset={1}>
-                                    <div
-                                        style={{
-                                            width: "39px",
-                                            height: "39px",
-                                            position: "relative",
-                                            backgroundSize: "cover",
-                                            backgroundImage: "url("+ headimgurl +")"
-                                        }}
-                                        >
-                                    </div>
-                                </Col>
-                            </Row>
-                        </div>
+                        <Message key={i.createAt.getTime()} i={i} headimgurl={headimgurl} role={this.props.role}/>
                     );
                 }
             }
