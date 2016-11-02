@@ -1,5 +1,5 @@
 import React from 'react';
-import Message from './message.jsx'
+import Message from './message.jsx';
 import { Input, Button } from 'antd';
 
 
