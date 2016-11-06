@@ -38,7 +38,7 @@ class Message extends React.Component {
                             width: "39px",
                             height: "39px",
                             position: "relative",
-                            backgroundSize: "cover",
+                            backgroundSize: "cover",margin: "auto",
                             backgroundImage: "url("+ headimgurl +")"
                         }}
                         >
@@ -62,7 +62,7 @@ class Message extends React.Component {
                             width: "39px",
                             height: "39px",
                             position: "relative",
-                            backgroundSize: "cover",
+                            backgroundSize: "cover",margin: "auto",
                             backgroundImage: "url("+ headimgurl +")"
                         }}
                         >
@@ -92,7 +92,7 @@ class Message extends React.Component {
                             width: "39px",
                             height: "39px",
                             position: "relative",
-                            backgroundSize: "cover",
+                            backgroundSize: "cover",margin: "auto",
                             backgroundImage: "url("+ headimgurl +")"
                         }}
                         >
@@ -128,7 +128,7 @@ class Message extends React.Component {
                             width: "39px",
                             height: "39px",
                             position: "relative",
-                            backgroundSize: "cover",
+                            backgroundSize: "cover",margin: "auto",
                             backgroundImage: "url("+ headimgurl +")"
                         }}
                         >

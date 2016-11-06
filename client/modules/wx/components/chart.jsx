@@ -1,6 +1,7 @@
 import React from 'react';
 import Message from './message.jsx';
 import { Input, Button } from 'antd';
+import {animateScroll} from 'react-scroll/lib/index.js';
 
 
 class Chart extends React.Component {
@@ -8,6 +9,7 @@ class Chart extends React.Component {
         super(props);
         this.onClick = this.onClick.bind(this);
         this.onChange = this.onChange.bind(this);
+        animateScroll.scrollToBottom();
     }
 
     onClick() {
@@ -16,6 +18,9 @@ class Chart extends React.Component {
     }
 
     onChange(e) {
+        //React.findDOMNode(this.refs.msg_end).scrollIntoView();
+        //$('#msg_end').scrollIntoView();
+        animateScroll.scrollToBottom();
         this.setState({message: e.target.value});
     }
 
@@ -69,7 +74,9 @@ class Chart extends React.Component {
                 user_name = this.props.wx_user.doctor_data.nickname;
             }
         }
-
+        //$('#msg_end').scrollIntoView();
+        //this.refs['msg_end'].scrollIntoView();
+        //React.findDOMNode(this.refs.msg_end).scrollIntoView();
         return (
             <div>
                 <div className="wx-chart-header">
