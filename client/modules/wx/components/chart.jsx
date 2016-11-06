@@ -82,6 +82,7 @@ class Chart extends React.Component {
         //$('#msg_end').scrollIntoView();
         //this.refs['msg_end'].scrollIntoView();
         //React.findDOMNode(this.refs.msg_end).scrollIntoView();
+        animateScroll.scrollToBottom();
         return (
             <div>
                 <div className="wx-chart-header">
