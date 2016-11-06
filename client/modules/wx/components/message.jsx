@@ -26,13 +26,13 @@ class Message extends React.Component {
         let col1, col2, ret_div;
         if (i.from == 'user' && role == 'user') {
             col1 = (
-                <Col span={21}>
+                <Col span={20}>
                     <div> 我 {i.createAt.toLocaleString()}</div>
                     {iMessage(i.message)}
                 </Col>
             );
             col2 = (
-                <Col span={2} offset={1}>
+                <Col span={3} offset={1}>
                     <div
                         style={{
                             width: "39px",
@@ -56,7 +56,7 @@ class Message extends React.Component {
         }
         if (i.from == 'user' && role == 'doctor') {
             col1 = (
-                <Col span={2}>
+                <Col span={3}>
                     <div
                         style={{
                             width: "39px",
@@ -70,7 +70,7 @@ class Message extends React.Component {
                 </Col>
             );
             col2 = (
-                <Col span={21} offset={1}>
+                <Col span={20} offset={1}>
                     <div> 患者 {i.createAt.toLocaleString()}</div>
                     {iMessage(i.message)}
                 </Col>
@@ -86,7 +86,7 @@ class Message extends React.Component {
         }
         if (i.from == 'doctor' && role == 'user') {
             col1 = (
-                <Col span={2}>
+                <Col span={3}>
                     <div
                         style={{
                             width: "39px",
@@ -100,7 +100,7 @@ class Message extends React.Component {
                 </Col>
             );
             col2 = (
-                <Col span={21} offset={1}>
+                <Col span={20} offset={1}>
                     <div> 医生 {i.createAt.toLocaleString()}</div>
                     {iMessage(i.message)}
                 </Col>
@@ -116,13 +116,13 @@ class Message extends React.Component {
         }
         if (i.from == 'doctor' && role == 'doctor') {
             col1 = (
-                <Col span={21}>
+                <Col span={20}>
                     <div> 我 {i.createAt.toLocaleString()} </div>
                     {iMessage(i.message)}
                 </Col>
             );
             col2 = (
-                <Col span={2} offset={1}>
+                <Col span={3} offset={1}>
                     <div
                         style={{
                             width: "39px",

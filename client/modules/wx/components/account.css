@@ -24,9 +24,9 @@
 .wx-chart-login-body{
 	width:100%;
 	/*margin:0px auto;*/
-	margin:50px auto 32px auto;
-	/*padding:50px 10px 32px 10px;*/
-	padding:0px 10px 0px 10px;
+	margin:50px auto 0px auto;
+	padding:50px 10px 32px 10px;
+	/*padding:0px 10px 0px 10px;*/
     background-color: white;
     overflow-y: scroll;
     height: 100%;
