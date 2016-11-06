@@ -8,6 +8,7 @@ class Chart extends React.Component {
     constructor(props) {
         super(props);
         this.onClick = this.onClick.bind(this);
+        this.onFocus = this.onFocus.bind(this);
         this.onChange = this.onChange.bind(this);
         animateScroll.scrollToBottom();
     }
@@ -15,6 +16,10 @@ class Chart extends React.Component {
     onClick() {
         this.props.sendMessage(this.props.wx_chart_history._id, this.state.message, this.props.role);
         this.setState({message: ''});
+    }
+
+    onFocus() {
+        animateScroll.scrollToBottom();
     }
 
     onChange(e) {
@@ -87,7 +92,7 @@ class Chart extends React.Component {
                     {chartMessages}
                 </div>
                 <div id='input' style={{position: 'fixed', bottom: "0px"}}>
-                    <Input ref='message' placeholder="输入聊天内容" onChange={this.onChange}
+                    <Input ref='message' placeholder="输入聊天内容" onChange={this.onChange} onFocus={this.onFocus}
                            value={messageValue} addonAfter={sendButton}/>
                 </div>
             </div>
