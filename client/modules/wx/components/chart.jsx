@@ -10,6 +10,7 @@ class Chart extends React.Component {
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onChange = this.onChange.bind(this);
+        //this.setState({fixed: 'fixed'});
         animateScroll.scrollToBottom();
     }
 
@@ -19,6 +20,7 @@ class Chart extends React.Component {
     }
 
     onFocus() {
+        this.setState({fixed: 'fixed'});
         animateScroll.scrollToBottom();
     }
 
@@ -83,9 +85,12 @@ class Chart extends React.Component {
         //this.refs['msg_end'].scrollIntoView();
         //React.findDOMNode(this.refs.msg_end).scrollIntoView();
         animateScroll.scrollToBottom();
+
+        const fixed = this.state ? this.state.fixed: 'fixed';
+
         return (
             <div>
-                <div className="wx-chart-header">
+                <div className="wx-chart-header" style={{position: fixed}}>
                     {user_name}
                     {this.props.role == 'doctor' ? '患者': '医生'}
                 </div>
