@@ -46,23 +46,23 @@ export default function () {
             }, {
                 $set: args.obj
             });
-            const obj = args.obj;
-            if(obj.thumb && obj.thumb.indexOf("base64") > -1) {
-                upload(obj.thumb, function(data) {
-                    console.log('start update new oss');
-                    console.log(data);
-                    console.log(args);
-                    Banners.update({
-                        _id: args.__id
-                    }, {
-                        $set: {
-                            "thumb": data
-                        }
-                    });
-                }, function(e) {
-                    throw e;
-                });
-            }
+            //const obj = args.obj;
+            //if(obj.thumb && obj.thumb.indexOf("base64") > -1) {
+            //    upload(obj.thumb, function(data) {
+            //        console.log('start update new oss');
+            //        console.log(data);
+            //        console.log(args);
+            //        Banners.update({
+            //            _id: args.__id
+            //        }, {
+            //            $set: {
+            //                "thumb": data
+            //            }
+            //        });
+            //    }, function(e) {
+            //        throw e;
+            //    });
+            //}
         }
     });
 }
