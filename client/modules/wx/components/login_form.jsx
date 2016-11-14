@@ -12,7 +12,7 @@ let LoginForm = React.createClass({
     handleSubmit(e) {
         e.preventDefault();
         const {userName, userNo} = this.props.form.getFieldsValue();
-        const wx_user_id = this.props.wx_user._id;
+        const wx_user_id = this.props.wx_user.u_id;
         this.props.auth(userName, userNo, wx_user_id);
     },
 
