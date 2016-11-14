@@ -82,6 +82,7 @@ class Chart extends React.Component {
                 user_name = this.props.wx_user.doctor_data.nickname;
             }
         }
+        animateScroll.scrollToBottom();
 
         return (
             <div>
