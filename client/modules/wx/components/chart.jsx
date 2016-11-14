@@ -10,13 +10,16 @@ class Chart extends React.Component {
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onChange = this.onChange.bind(this);
-        //this.setState({fixed: 'fixed'});
-        animateScroll.scrollToBottom();
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     onClick() {
         this.props.sendMessage(this.props.wx_chart_history._id, this.state.message, this.props.role);
         this.setState({message: ''});
+    }
+
+    componentDidMount() {
+        animateScroll.scrollToBottom();
     }
 
     onFocus() {
@@ -25,8 +28,6 @@ class Chart extends React.Component {
     }
 
     onChange(e) {
-        //React.findDOMNode(this.refs.msg_end).scrollIntoView();
-        //$('#msg_end').scrollIntoView();
         animateScroll.scrollToBottom();
         this.setState({message: e.target.value});
     }
@@ -81,16 +82,10 @@ class Chart extends React.Component {
                 user_name = this.props.wx_user.doctor_data.nickname;
             }
         }
-        //$('#msg_end').scrollIntoView();
-        //this.refs['msg_end'].scrollIntoView();
-        //React.findDOMNode(this.refs.msg_end).scrollIntoView();
-        animateScroll.scrollToBottom();
-
-        const fixed = this.state ? this.state.fixed: 'fixed';
 
         return (
             <div>
-                <div className="wx-chart-header" style={{position: fixed}}>
+                <div className="wx-chart-header" style={{position: "fixed"}}>
                     {user_name}
                     {this.props.role == 'doctor' ? '患者': '医生'}
                 </div>
