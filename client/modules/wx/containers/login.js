@@ -14,7 +14,7 @@ export const composer = ({context}, onData) => {
                 //alert('已经认证该医生');   //未来可以改成多用户聊天窗口选择的模式
             });
             //return false;
-        } else if (wx_user && wx_user.role == 'user') {
+        } else if (wx_user) {
             FlowRouter.go(`/wx/chart?wx_user_id=${user_id}&role=user`);
         }
         onData(null, {});
