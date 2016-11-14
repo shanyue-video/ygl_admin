@@ -6,21 +6,13 @@ import {WxUser, Doctors, Persons, WxChartHistory} from '/lib/collections'
 export default function () {
     Meteor.methods({
         'wx.getUser'(user_id) {
-            HTTP.get(`http://yigonglue.com/wx_get_user?user_id=${user_id}`, (error, result) => {
-                if (!error) {
-                    const r_o = result;
-                    try {
-                        WxUser.insert({
-                            u_id: r_o.data.openid,
-                            data: r_o.data,
-                            createAt: new Date()
-                        });
-                    } catch (e) {
-                        console.log('insert dump id');
-                        //console.log(e);
-                    }
-                }
-            });
+            const wx_user = WxUser.findOne({u_id: user_id});
+            if(!wx_user) {
+                return 'no_doctor';
+            } else {
+                console.log(wx_user);
+                //return 'user';
+            }
         },
         'wx.auth'(obj) {
             const p = Persons.findOne({no: obj.userNo});
@@ -43,15 +35,7 @@ export default function () {
                 };
                 Persons.insert(insert_obj);
             }
-            WxUser.update({ _id: obj.wx_user_id }, {
-                $set: {role: 'user'}
-            });
-            const wx_user = WxUser.findOne({_id: obj.wx_user_id});
-            if(wx_user.doctor_data) {
-                return 'user';
-            } else {
-                return 'toNone';
-            }
+            return 'user';
         },
         'wx.chart'(obj) {
             const chart = WxChartHistory.findOne({_id: obj.wx_chart_history_id});
