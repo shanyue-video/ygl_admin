@@ -11,7 +11,7 @@ export default function () {
                 const wx_user = WxUser.find({u_id: wx_user_id}, {sort: {createAt: -1}}).fetch()[0];
                 doctor_id = wx_user.doctor_data.openid;
                 const init_his = {
-                    wx_user_id: wx_user._id,
+                    wx_user_id: wx_user.data.openid,
                     doctor_id: wx_user.doctor_data.openid,
                     init: true
                 };
