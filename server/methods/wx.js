@@ -11,8 +11,9 @@ export default function () {
                     const r_o = result;
                     try {
                         WxUser.insert({
-                            _id: r_o.data.openid,
-                            data: r_o.data
+                            u_id: r_o.data.openid,
+                            data: r_o.data,
+                            createAt: new Date()
                         });
                     } catch (e) {
                         console.log('insert dump id');
@@ -23,18 +24,6 @@ export default function () {
         },
         'wx.auth'(obj) {
             const p = Persons.findOne({no: obj.userNo});
-            //const doctor = Doctors.findOne({no_id: obj.userNo});
-            //if(doctor) {
-            //    Doctors.update({ _id: doctor._id }, {
-            //        $addToSet: {
-            //            wx_users: obj.wx_user_id
-            //        }
-            //    });
-            //    WxUser.update({ _id: obj.wx_user_id }, {
-            //        $set: {role: 'maybe_doctor'}
-            //    });
-            //    return 'doctor';
-            //}
             if(p) {
                 let modify = {realName: obj.userName};
                 Persons.update({ _id: p._id }, {
