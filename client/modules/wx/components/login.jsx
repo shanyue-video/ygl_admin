@@ -6,7 +6,7 @@ import LoginForm from '../containers/login_form.js'
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        const user_id = FlowRouter.getQueryParam('user_id');
+        const user_id = FlowRouter.getQueryParam('user_id') || FlowRouter.getQueryParam('wx_user_id');
         this.props.getUser(user_id);
     }
 
