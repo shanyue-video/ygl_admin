@@ -16,7 +16,13 @@ export const composer = ({context}, onData) => {
                 console.log('订阅的长度>1' + wx_chart_historys);
             }
             const wx_chart_history = Collections.WxChartHistory.find().fetch()[0];
-            const wx_user = Collections.WxUser.find().fetch()[0];
+            //const wx_user = Collections.WxUser.find().fetch()[0];
+            let wx_user;
+            if (!doctor_id) {
+                wx_user = Collections.WxUser.find().fetch()[0];
+            } else {
+                wx_user = Collections.WxUser.find({"data.openid": wx_user_id, "doctor_data.openid": doctor_id}).fetch()[0];
+            }
             onData(null, {wx_chart_history, wx_user, role});
         }
     }

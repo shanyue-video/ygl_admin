@@ -6,6 +6,6 @@ export default function () {
     Meteor.publish('wx_user', function (wx_userId) {
         //console.log('!!!');
         //console.log(WxUser.find({_id: wx_userId}).fetch());
-        return WxUser.find({_id: wx_userId});
+        return WxUser.find({u_id: wx_userId}, {sort: {createAt: -1}});
     });
 }

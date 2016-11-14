@@ -8,7 +8,7 @@ export default function () {
         if (role == 'user') {
             const wch = WxChartHistory.find({wx_user_id: wx_user_id, doctor_id: doctor_id}).fetch();
             if (wch.length == 0 || !doctor_id) {
-                const wx_user = WxUser.find({_id: wx_user_id}).fetch()[0];
+                const wx_user = WxUser.find({u_id: wx_user_id}, {sort: {createAt: -1}}).fetch()[0];
                 doctor_id = wx_user.doctor_data.openid;
                 const init_his = {
                     wx_user_id: wx_user._id,
