@@ -43,11 +43,12 @@ export default function () {
                 //const role = obj.role == 'doctor' ? 'user': 'doctor';
                 let url;
                 if(obj.role == 'doctor') {
-                    url = "http://yigonglue.com/wx_send_message?to_openid=" +
-                        chart.wx_user_id + "&from_openid=" + chart.doctor_id + "&role=" + obj.role;
+                    //url = "http://yigonglue.com/wx_send_message?to_openid=" +
+                    //    chart.wx_user_id + "&from_openid=" + chart.doctor_id + "&role=" + obj.role;
                 } else {
-                    url = "http://yigonglue.com/wx_send_message?to_openid=" +
-                        chart.doctor_id + "&from_openid=" + chart.wx_user_id + "&role=" + obj.role;
+                    //url = "http://yigonglue.com/wx_send_message?to_openid=" +
+                    //    chart.doctor_id + "&from_openid=" + chart.wx_user_id + "&role=" + obj.role;
+                    WxChartHistory.update({_id: chart._id}, {$inc: {doctor_unread: 1}});
                 }
 
                 HTTP.get(url, (error, result) => {
