@@ -51,6 +51,7 @@ export default function () {
                     WxChartHistory.update({_id: chart._id}, {$inc: {doctor_unread: 1}});
                 }
 
+                /*
                 HTTP.get(url, (error, result) => {
                         if (!error) {
                             //const r_o = result;
@@ -58,6 +59,7 @@ export default function () {
                         }
                     }
                 );
+                */
                 WxChartHistory.update({_id: chart._id}, {
                     $addToSet: {
                         messages: {
