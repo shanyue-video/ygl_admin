@@ -7,7 +7,7 @@ export default function () {
         // 发起聊天的都是患者
         if (role == 'user') {
             const wch = WxChartHistory.find({wx_user_id: wx_user_id, doctor_id: doctor_id}).fetch();
-            if (wch.length == 0 || !doctor_id) {
+            if (wch.length == 0 && !doctor_id) {
                 const wx_user = WxUser.find({u_id: wx_user_id}, {sort: {createAt: -1}}).fetch()[0];
                 doctor_id = wx_user.doctor_data.openid;
                 const init_his = {
@@ -16,6 +16,9 @@ export default function () {
                     init: true
                 };
                 WxChartHistory.insert(init_his);
+            } else if (wch.length >= 0 && !doctor_id) {
+                const wx_user = WxUser.find({u_id: wx_user_id}, {sort: {createAt: -1}}).fetch()[0];
+                doctor_id = wx_user.doctor_data.openid;
             }
             return WxChartHistory.find({wx_user_id: wx_user_id, doctor_id: doctor_id});
         } else if (role == 'doctor') {
