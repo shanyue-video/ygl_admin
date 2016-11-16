@@ -11,6 +11,8 @@ class Chart extends React.Component {
         this.onFocus = this.onFocus.bind(this);
         this.onChange = this.onChange.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
+        this.componentDidUpdate = this.componentDidUpdate.bind(this);
+        this.componentWillUpdate = this.componentWillUpdate.bind(this);
     }
 
     onClick() {
@@ -19,6 +21,14 @@ class Chart extends React.Component {
     }
 
     componentDidMount() {
+        animateScroll.scrollToBottom();
+    }
+
+    componentDidUpdate() {
+        animateScroll.scrollToBottom();
+    }
+
+    componentWillUpdate() {
         animateScroll.scrollToBottom();
     }
 
@@ -82,7 +92,6 @@ class Chart extends React.Component {
                 user_name = this.props.wx_user.doctor_data.nickname;
             }
         }
-        animateScroll.scrollToBottom();
 
         return (
             <div>
