@@ -20,6 +20,22 @@ const run = () => {
                     throw e;
                 });
             }
+
+            if(one.avatar && one.avatar.indexOf("base64") > -1) {
+                console.log(one);
+                upload(one.avatar, function(data) {
+                    Doctors.update({
+                        _id: one._id
+                    }, {
+                        $set: {
+                            "avatar": data
+                        }
+                    });
+                }, function(e) {
+                    throw e;
+                });
+            }
+
         });
     };
 
