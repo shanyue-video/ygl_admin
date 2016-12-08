@@ -32,15 +32,18 @@ let AddButton = React.createClass({
         });
     },
     handleSubmit() {
-        const { desc, orderBy, detail, group, status } = this.props.form.getFieldsValue();
-        const thumb = $('#picture').attr("data-file");
+        const { title, summray, weight, detail } = this.props.form.getFieldsValue();
+        const thumb = this.props.opId.thumb || $('#picture').attr("data-file");
         const createAt = new Date();
-        const obj = {desc, orderBy, detail, group, status: parseInt(status), thumb, createAt};
+        const obj = {title, summray, weight, detail, thumb, createAt};
         if (this.props.opId == undefined) {
-            Action.Banners.insert(obj);
+            //Action.Banners.insert(obj);
+            alert('目前未实现新增');
         } else {
-            //console.log(this.props.opId);
-            Action.Banners.update(obj, this.props.opId._id);
+            console.log('---->');
+            console.log(obj);
+            console.log(this.props.opId._id);
+            Action.News.update(obj, this.props.opId._id);
         }
         this.setState({
             visible: false,
@@ -67,11 +70,11 @@ let AddButton = React.createClass({
 
     render() {
         const { getFieldProps } = this.getFieldProps;
-        let fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+        let fieldProps = ['title', 'summray', 'weight', 'detail'].map((s) => {
             return getFieldProps(s, {});
         });
         if (this.props.opId != undefined) {
-            fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+            fieldProps = ['title', 'summray', 'weight', 'detail'].map((s) => {
                 if(s == 'status')
                     return getFieldProps(s, {'initialValue': this.props.opId[s]+''});
                 else
@@ -85,59 +88,31 @@ let AddButton = React.createClass({
                         />
                 </div>
                 <br />
-                <Row align='middle' gutter={16}>
-                    <Col sm={10}>
+                <Row align='middle' gutter={0}>
+                    <Col sm={24}>
                         <FormItem
-                            label="文字描述"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
+                            label="标题"
+                            labelCol={{ span: 2 }}
+                            wrapperCol={{ span: 22 }}
                             >
                             <Input placeholder="文字描述" size="default" type="text" autoComplete="off"
                                 {...fieldProps[0]} />
                         </FormItem>
                         <FormItem
-                            label="排序"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
+                            label="简介"
+                            labelCol={{ span: 2 }}
+                            wrapperCol={{ span: 22 }}
                             >
                             <Input placeholder="排序" size="default" autoComplete="off"
                                 {...fieldProps[1]} />
                         </FormItem>
                         <FormItem
-                            label="内容"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
+                            label="权重"
+                            labelCol={{ span: 2 }}
+                            wrapperCol={{ span: 22 }}
                             >
-                            <Input type="textarea" placeholder="内容" autosize autoComplete="off"
+                            <Input type="text" placeholder="权重" autosize autoComplete="off"
                                 {...fieldProps[2]} />
-
-                        </FormItem>
-                    </Col>
-                    <Col sm={10} offset={2}>
-                        <FormItem
-                            label="组"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
-                            >
-                            <Input placeholder="组" size="default"
-                                {...fieldProps[3]} />
-                        </FormItem>
-                        <FormItem
-                            label="状态"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
-                            >
-                            <Select style={{ width: 113 }} placeholder="请选择状态"
-                                {...fieldProps[4]}>
-                                <Option value="1">已上线</Option>
-                                <Option value="0">未上线</Option>
-                            </Select>
-                        </FormItem>
-                        <FormItem
-                            lable=""
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14, offset: 10 }}
-                            >
                         </FormItem>
                     </Col>
                 </Row>

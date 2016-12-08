@@ -4,6 +4,7 @@ import Badge from './badge';
 import Banners from './banners';
 import Referral from './referral';
 import Doctors from './doctors';
+import News from './news';
 
 export default {
   Navigations,
@@ -11,5 +12,6 @@ export default {
   Badge,
   Banners,
   Referral,
-  Doctors
+  Doctors,
+  News
 };

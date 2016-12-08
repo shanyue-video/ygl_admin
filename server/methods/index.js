@@ -12,6 +12,7 @@ import uploadhospitalThumb from './uploadhospital_thumb';
 import getDoctorCert from './get_doctor_cert';
 import Doctors from './doctors';
 import wx from './wx';
+import news from './news';
 
 export default function () {
   accountLoginWithTel();
@@ -28,4 +29,5 @@ export default function () {
   getDoctorCert();
   Doctors();
   wx();
+  news();
 }
