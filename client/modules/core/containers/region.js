@@ -6,7 +6,7 @@ export const composer = ({context}, onData) => {
     const {Meteor, Collections} = context();
 
     if (Meteor.subscribe('regions.list').ready()) {
-        const regions = Collections.Regions.find({}, { sort: { createAt: -1 } }).fetch();
+        const regions = Collections.Regions.find({}, { sort: { orderBy: 1 } }).fetch();
         onData(null, {regions});
     } else {
         onData(null, {});

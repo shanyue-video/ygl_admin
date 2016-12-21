@@ -2,8 +2,12 @@ import React from 'react';
 
 import { Table } from 'antd';
 import { Modal, Button } from 'antd';
+import { Pagination } from 'antd';
 
 import { Form, Input, Row, Col, Select } from 'antd';
+
+import ReginEditor from '../containers/regin_editor.js';
+
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -189,11 +193,13 @@ class Region extends React.Component {
                 return r.isopen == 1 ? "是" : "否";
             }
         },{
+            title: '区域编辑',
             render: function(obj) {
                 //return "<a onclick='edit(\"" + r._id + "\")'>编辑</a>";
                 return (<AddButton text='编辑' opId={obj} />);
             }
         }, {
+            title: '医院/科室编辑',
             render: function(obj) {
                 //return "<a href='/regionChild?id=" + r._id + "'>子分类</a>";
                 return (<AddButton text='子分类' opId={obj} />);
@@ -202,10 +208,11 @@ class Region extends React.Component {
 
         return (
             <Table
+                size='small'
                 columns={columns}
                 dataSource={data}
                 bordered
-                footer={() => <AddButton text='新增'/>}
+                footer={() => <ReginEditor text='新增'/>}
                 />
         );
     }

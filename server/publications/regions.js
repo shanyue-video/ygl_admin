@@ -4,6 +4,6 @@ import {check} from 'meteor/check';
 
 export default function () {
   Meteor.publish('regions.list', function () {
-    return Regions.find();
+    return Regions.find({parent: "root"});
   });
 }
