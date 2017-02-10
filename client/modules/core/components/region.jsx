@@ -24,11 +24,6 @@ let AddButton = React.createClass({
             visible: true,
         });
     },
-    handleOk() {
-        this.setState({
-            visible: false,
-        });
-    },
     handleCancel() {
         this.props.form.resetFields();
         this.setState({
@@ -36,46 +31,20 @@ let AddButton = React.createClass({
         });
     },
     handleSubmit() {
-        const { desc, orderBy, detail, group, status } = this.props.form.getFieldsValue();
-        const thumb = $('#picture').attr("data-file");
-        const createAt = new Date();
-        const obj = {desc, orderBy, detail, group, status: parseInt(status), thumb, createAt};
-        if (this.props.opId == undefined) {
-            Action.Banners.insert(obj);
-        } else {
-            //console.log(this.props.opId);
-            Action.Banners.update(obj, this.props.opId._id);
-        }
+        const obj = this.props.form.getFieldsValue();
+        Action.region.insert_or_update(obj);
         this.setState({
             visible: false,
         });
     },
-    onChange(event) {
-        var that = $(event.currentTarget);
-        lrz(event.currentTarget.files[0], {
-            width: 720
-        }).then(function(rst) {
-            that.parent().css({
-                "background-image": "url(" + rst.base64 + ")"
-            });
-            that.attr("data-file", rst.base64);
-        });
-    },
-    inputRef(c) {
-        if (this.props.opId){
-            const thumb = this.props.opId.thumb;
-            c.style.backgroundImage = "url(" + thumb + ")";
-            console.log(c);
-        }
-    },
 
     render() {
         const { getFieldProps } = this.getFieldProps;
-        let fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+        let fieldProps = ['name', 'baiduid', 'baidupid', 'orderBy', 'parent', 'status', 'summary', '_id'].map((s) => {
             return getFieldProps(s, {});
         });
         if (this.props.opId != undefined) {
-            fieldProps = ['desc', 'orderBy', 'detail', 'group', 'status'].map((s) => {
+            fieldProps = ['name', 'baiduid', 'baidupid', 'orderBy', 'parent', 'status', 'summary', '_id'].map((s) => {
                 if(s == 'status')
                     return getFieldProps(s, {'initialValue': this.props.opId[s]+''});
                 else
@@ -84,47 +53,57 @@ let AddButton = React.createClass({
         }
         const editorForm = (
             <Form>
-                <div ref={this.inputRef} className="ff-file">
-                    <input onChange={this.onChange} type="file" id="picture" name="picture"
-                        />
-                </div>
-                <br />
                 <Row align='middle' gutter={16}>
                     <Col sm={10}>
                         <FormItem
-                            label="文字描述"
+                            label="名称"
                             labelCol={{ span: 10 }}
                             wrapperCol={{ span: 14 }}
                             >
-                            <Input placeholder="文字描述" size="default" type="text" autoComplete="off"
+                            <Input placeholder="名称" size="default" type="text" autoComplete="off"
                                 {...fieldProps[0]} />
+                        </FormItem>
+                        <FormItem
+                            label="baiduid"
+                            labelCol={{ span: 10 }}
+                            wrapperCol={{ span: 14 }}
+                            >
+                            <Input placeholder="baiduid" size="default" autoComplete="off" type="text" disabled={true}
+                                {...fieldProps[1]} />
+                        </FormItem>
+                        <FormItem
+                            label="baidupid"
+                            labelCol={{ span: 10 }}
+                            wrapperCol={{ span: 14 }}
+                            >
+                            <Input type="textarea" placeholder="baidupid" autosize autoComplete="off" type="text"
+                                   disabled={true} {...fieldProps[2]} />
                         </FormItem>
                         <FormItem
                             label="排序"
                             labelCol={{ span: 10 }}
                             wrapperCol={{ span: 14 }}
                             >
-                            <Input placeholder="排序" size="default" autoComplete="off"
-                                {...fieldProps[1]} />
-                        </FormItem>
-                        <FormItem
-                            label="内容"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
-                            >
-                            <Input type="textarea" placeholder="内容" autosize autoComplete="off"
-                                {...fieldProps[2]} />
-
+                            <Input type="textarea" placeholder="排序" autosize autoComplete="off" type="text"
+                                {...fieldProps[3]} />
                         </FormItem>
                     </Col>
                     <Col sm={10} offset={2}>
                         <FormItem
-                            label="组"
+                            label="节点id"
                             labelCol={{ span: 10 }}
                             wrapperCol={{ span: 14 }}
                             >
-                            <Input placeholder="组" size="default"
-                                {...fieldProps[3]} />
+                            <Input placeholder="节点id" size="default" type="text" disabled={true}
+                                {...fieldProps[7]} />
+                        </FormItem>
+                        <FormItem
+                            label="父节点id"
+                            labelCol={{ span: 10 }}
+                            wrapperCol={{ span: 14 }}
+                            >
+                            <Input placeholder="父节点id" size="default" type="text" disabled={true}
+                                {...fieldProps[4]} />
                         </FormItem>
                         <FormItem
                             label="状态"
@@ -132,16 +111,17 @@ let AddButton = React.createClass({
                             wrapperCol={{ span: 14 }}
                             >
                             <Select style={{ width: 113 }} placeholder="请选择状态"
-                                {...fieldProps[4]}>
+                                {...fieldProps[5]}>
                                 <Option value="1">已上线</Option>
                                 <Option value="0">未上线</Option>
                             </Select>
                         </FormItem>
                         <FormItem
-                            lable=""
+                            label="简介"
                             labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14, offset: 10 }}
+                            wrapperCol={{ span: 14 }}
                             >
+                            <Input type="textarea" placeholder="简介" autosize {...fieldProps[6]} />
                         </FormItem>
                     </Col>
                 </Row>
@@ -199,7 +179,7 @@ class Region extends React.Component {
                 return (<AddButton text='编辑' opId={obj} />);
             }
         }, {
-            title: '医院/科室编辑',
+            title: '子集',
             render: function(obj) {
                 //return "<a href='/regionChild?id=" + r._id + "'>子分类</a>";
                 return (<AddButton text='子分类' opId={obj} />);

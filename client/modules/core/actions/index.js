@@ -5,6 +5,7 @@ import Banners from './banners';
 import Referral from './referral';
 import Doctors from './doctors';
 import News from './news';
+import region from './region';
 
 export default {
   Navigations,
@@ -13,5 +14,6 @@ export default {
   Banners,
   Referral,
   Doctors,
-  News
+  News,
+  region
 };
