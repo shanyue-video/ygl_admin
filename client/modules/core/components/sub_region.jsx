@@ -188,10 +188,8 @@ class Region extends React.Component {
         }, {
             title: '子集',
             render: function(obj) {
-                //return "<a href='/regionChild?id=" + r._id + "'>子分类</a>";
-                //return (<AddButton text='子分类' opId={obj} />);
                 return (
-                    <Button onClick={() => {FlowRouter.go('/sub_region?parent_id=' + obj._id);}}>
+                    <Button onClick={() => {console.log(obj); FlowRouter.go('/sub_region?parent_id=' + obj._id);}}>
                         子分类
                     </Button>
                 );
