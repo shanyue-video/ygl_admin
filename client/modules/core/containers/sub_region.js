@@ -8,7 +8,12 @@ export const composer = ({context}, onData) => {
 
     if (Meteor.subscribe('regions.sub', parent_id).ready()) {
         const regions = Collections.Regions.find({}, { sort: { orderBy: 1 } }).fetch();
-        onData(null, {regions});
+        if (regions.length > 0) {
+            onData(null, {regions});
+        } else {
+            const hospitals = Collections.Hospitals.find({}, { sort: { orderBy: 1 } }).fetch();
+            FlowRouter.go('/hospitals?id='+hospitals._id);
+        }
     } else {
         onData(null, {});
     }
