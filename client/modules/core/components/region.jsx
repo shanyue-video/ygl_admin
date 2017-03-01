@@ -145,14 +145,35 @@ AddButton = Form.create()(AddButton);
 class Region extends React.Component {
     constructor(props) {
         super(props);
-        //this.onClick = this.onClick.bind(this);
+        this.onClick = this.onClick.bind(this);
+        this.isBack = this.isBack.bind(this);
     }
 
-    //onClick(args) {
-        //const {key} = args;
-        //this.props.urlGo(key);
-        //console.log('...');
-    //}
+    onClick(args) {
+        let to_urls = FlowRouter.current().queryParams.c_path;
+        let to_url;
+        if (typeof to_urls != "string") {
+            to_url = to_urls.shift();
+            let c_url='';
+            while (to_urls.length > 0) {
+                c_url += '&c_path=' + to_urls.shift();
+            }
+            to_url += c_url;
+        } else {
+            to_url = to_urls;
+        }
+        FlowRouter.go(to_url);
+    }
+
+    isBack() {
+        if (FlowRouter.current().queryParams.parent_id) {
+            console.log('true');
+            return "true";
+        } else {
+            console.log('none');
+            return "none";
+        }
+    }
 
     render() {
         let rawData = this.props.regions; //.toString();
@@ -188,10 +209,11 @@ class Region extends React.Component {
         }, {
             title: '子集',
             render: function(obj) {
-                //return "<a href='/regionChild?id=" + r._id + "'>子分类</a>";
-                //return (<AddButton text='子分类' opId={obj} />);
                 return (
-                    <Button onClick={() => {FlowRouter.go('/sub_region?parent_id=' + obj._id);}}>
+                    <Button onClick={() => {
+                            FlowRouter.go(`/sub_region?parent_id=${obj._id}&c_path=${FlowRouter.current().path}`);}
+                        }
+                        >
                         子分类
                     </Button>
                 );
@@ -200,11 +222,14 @@ class Region extends React.Component {
 
         return (
             <Table
+                title={() => <Button type="primary" style={{display: this.isBack()}} onClick={this.onClick}>
+                        返回
+                        </Button>}
                 size='small'
                 columns={columns}
                 dataSource={data}
                 bordered
-                footer={() => <ReginEditor text='新增'/>}
+                footer={() => <AddButton text='新增'/>}
                 />
         );
     }
