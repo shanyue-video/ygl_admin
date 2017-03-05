@@ -11,7 +11,6 @@ export const composer = ({context}, onData) => {
         if (regions.length > 0) {
             onData(null, {regions});
         } else {
-            console.log('abc');
             const hospitals = Collections.Hospitals.find({}, { sort: { orderBy: 1 } }).fetch();
             if (hospitals.length > 0) {
                 FlowRouter.go('/hospitals?parent_id=' + parent_id);

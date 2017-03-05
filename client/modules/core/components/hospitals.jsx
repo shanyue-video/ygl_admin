@@ -155,7 +155,7 @@ class Hospitals extends React.Component {
     //}
 
     render() {
-        let rawData = this.props.regions; //.toString();
+        let rawData = this.props.hospitals; //.toString();
         const data = rawData;
 
         const columns = [{

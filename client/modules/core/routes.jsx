@@ -144,7 +144,7 @@ export default function (injectDeps, {FlowRouter}) {
     });
 
     FlowRouter.route('/hospitals', {
-        name: 'sub_region',
+        name: 'hospitals',
         action() {
             mount(MainLayoutCtx, {
                 navigations: () => (<Navigations />),
